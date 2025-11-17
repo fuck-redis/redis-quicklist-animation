@@ -1,0 +1,185 @@
+.controlSection {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.operationGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.operationGroup h4 {
+  margin: 0;
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.buttonGroup button {
+  width: 100%;
+}
+
+.configItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.configItem label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.configItem input[type="number"],
+.configItem input[type="range"] {
+  width: 100%;
+}
+
+.rangeValue {
+  display: inline-block;
+  margin-left: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.scenarioCard {
+  padding: var(--spacing-md);
+  background: var(--bg-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.scenarioCard:hover {
+  background: #e6f7ff;
+  transform: translateY(-2px);
+}
+
+.scenarioTitle {
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.scenarioDesc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.scenarioMetrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.metricTag {
+  padding: 2px 8px;
+  background: white;
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* 动画控制样式 */
+.animationStatus {
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--bg-color);
+  border-radius: 8px;
+}
+
+.statusItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.statusLabel {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.statusValue {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.progressBar {
+  height: 8px;
+  background: #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #1890ff, #52c41a);
+  transition: width 0.3s ease;
+}
+
+.speedControl {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.speedLabel {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.speedButtons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-xs);
+}
+
+.speedButton {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+
+.speedButton:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.speedButton.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.helpText {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: #e6f7ff;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.helpText small {
+  color: var(--text-secondary);
+  font-size: 12px;
+}

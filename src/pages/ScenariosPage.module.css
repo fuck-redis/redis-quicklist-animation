@@ -1,0 +1,256 @@
+.scenariosPage {
+  min-height: calc(100vh - 64px);
+  background: #f8f9fa;
+}
+
+.pageHeader {
+  background: white;
+  border-bottom: 1px solid #e8ecf1;
+  padding: var(--spacing-xl) var(--spacing-xl);
+  text-align: center;
+}
+
+.pageHeader h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pageHeader p {
+  font-size: 18px;
+  color: #5a6c7d;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 介绍卡片区 */
+.introSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.introCard {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+}
+
+.introCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.cardIcon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-md);
+}
+
+.introCard h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-sm);
+}
+
+.introCard p {
+  color: #5a6c7d;
+  line-height: 1.6;
+}
+
+/* 场景说明 */
+.scenariosIntro {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  background: white;
+}
+
+.scenariosIntro h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.scenarioList {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.scenarioItem {
+  background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+  border: 2px solid #e6f2ff;
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  transition: all 0.3s;
+}
+
+.scenarioItem:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.1);
+}
+
+.scenarioHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.scenarioIcon {
+  font-size: 32px;
+}
+
+.scenarioHeader h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.scenarioDesc p {
+  margin-bottom: var(--spacing-sm);
+  color: #5a6c7d;
+  line-height: 1.8;
+}
+
+.scenarioDesc strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* 使用指南 */
+.howToUse {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.howToUse h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.step {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+
+.stepNum {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.step p {
+  font-size: 14px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+}
+
+/* 性能建议 */
+.tips {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  background: #fffbe6;
+}
+
+.tips h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #d48806;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.tipsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.tip {
+  background: white;
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  border-left: 4px solid #faad14;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.tip strong {
+  color: #d48806;
+  font-size: 16px;
+}
+
+.tip span {
+  color: #5a6c7d;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .introSection,
+  .scenariosIntro,
+  .howToUse,
+  .content,
+  .tips {
+    padding: var(--spacing-md);
+  }
+  
+  .introSection,
+  .steps,
+  .tipsList {
+    grid-template-columns: 1fr;
+  }
+  
+  .pageHeader h1 {
+    font-size: 28px;
+  }
+  
+  .pageHeader p {
+    font-size: 16px;
+  }
+}

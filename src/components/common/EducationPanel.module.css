@@ -1,0 +1,257 @@
+.educationPanel {
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xl);
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+  padding-bottom: var(--spacing-md);
+}
+
+.section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: #262626;
+}
+
+.section p {
+  line-height: 1.8;
+  color: #595959;
+  margin-bottom: var(--spacing-md);
+}
+
+.highlight {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  margin: var(--spacing-md) 0;
+  font-size: 16px;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.comparisonItem {
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  border: 2px solid #e8e8e8;
+}
+
+.comparisonItem h4 {
+  font-size: 16px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.comparisonItem ul {
+  list-style: none;
+  padding: 0;
+}
+
+.comparisonItem li {
+  padding: var(--spacing-xs) 0;
+  color: #595959;
+}
+
+.comparisonItem li::before {
+  content: "• ";
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-right: var(--spacing-xs);
+}
+
+.configExplain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.paramItem {
+  padding: var(--spacing-md);
+  background: #fafafa;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.paramItem h4 {
+  font-size: 18px;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.paramItem ul {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+}
+
+.paramItem li {
+  margin: var(--spacing-xs) 0;
+  color: #595959;
+}
+
+.paramItem code {
+  background: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: var(--font-code);
+  color: #d73a49;
+}
+
+.tip {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: #e6f7ff;
+  border-radius: 4px;
+  border-left: 3px solid #1890ff;
+  font-size: 14px;
+}
+
+.codeBlock {
+  background: #1e1e1e;
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  margin-top: var(--spacing-md);
+}
+
+.codeBlock h4 {
+  color: #4ec9b0;
+  font-size: 16px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.codeBlock pre {
+  color: #d4d4d4;
+  font-family: var(--font-code);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin: 0;
+}
+
+.mechanism {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.mechanismItem {
+  padding: var(--spacing-md);
+  background: #f6ffed;
+  border-radius: 8px;
+  border: 1px solid #b7eb8f;
+}
+
+.mechanismItem h4 {
+  font-size: 16px;
+  color: #52c41a;
+  margin-bottom: var(--spacing-sm);
+}
+
+.mechanismItem ol {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+}
+
+.mechanismItem li {
+  margin: var(--spacing-xs) 0;
+  color: #595959;
+}
+
+.performanceTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--spacing-md);
+}
+
+.performanceTable th,
+.performanceTable td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-align: left;
+  border: 1px solid #e8e8e8;
+}
+
+.performanceTable th {
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
+}
+
+.performanceTable tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.bestPractices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.practice {
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  background: #fff7e6;
+  border: 1px solid #ffd591;
+}
+
+.practice h4 {
+  font-size: 16px;
+  color: #fa8c16;
+  margin-bottom: var(--spacing-sm);
+}
+
+.practice ul {
+  list-style: none;
+  padding: 0;
+}
+
+.practice li {
+  padding: var(--spacing-xs) 0;
+  color: #595959;
+}
+
+.practice li::before {
+  content: "→ ";
+  color: #fa8c16;
+  font-weight: bold;
+  margin-right: var(--spacing-xs);
+}
+
+.example {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-md);
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+.example h4 {
+  font-size: 16px;
+  color: #262626;
+  margin-bottom: var(--spacing-sm);
+}
+
+.code {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: var(--spacing-md);
+  border-radius: 4px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+}

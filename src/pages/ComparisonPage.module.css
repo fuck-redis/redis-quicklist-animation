@@ -1,0 +1,352 @@
+.comparisonPage {
+  min-height: calc(100vh - 64px);
+  background: #f8f9fa;
+}
+
+.pageHeader {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.pageHeader h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+}
+
+.pageHeader p {
+  font-size: 18px;
+  opacity: 0.95;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+}
+
+.structureSelector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.structureButton {
+  background: white;
+  border: 2px solid #e8ecf1;
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.structureButton:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.structureButton.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+  color: white;
+}
+
+.structureIcon {
+  font-size: 48px;
+}
+
+.structureName {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.detailSection {
+  background: white;
+  border-radius: 12px;
+  padding: var(--spacing-xl);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: var(--spacing-xl);
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 2px solid #e8ecf1;
+}
+
+.detailIcon {
+  font-size: 64px;
+}
+
+.detailHeader h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-xs);
+}
+
+.detailHeader p {
+  color: #5a6c7d;
+  font-size: 16px;
+}
+
+.prosConsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.prosSection,
+.consSection {
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+}
+
+.prosSection {
+  background: #f6ffed;
+  border-left: 4px solid #52c41a;
+}
+
+.consSection {
+  background: #fff7e6;
+  border-left: 4px solid #fa8c16;
+}
+
+.prosSection h3 {
+  color: #52c41a;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.consSection h3 {
+  color: #fa8c16;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.prosSection ul,
+.consSection ul {
+  list-style: none;
+  padding: 0;
+}
+
+.prosSection li,
+.consSection li {
+  padding: var(--spacing-xs) 0;
+  padding-left: 24px;
+  position: relative;
+  color: #2c3e50;
+}
+
+.prosSection li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #52c41a;
+  font-weight: bold;
+}
+
+.consSection li::before {
+  content: '⚠';
+  position: absolute;
+  left: 0;
+  color: #fa8c16;
+}
+
+.complexitySection {
+  margin-bottom: var(--spacing-xl);
+}
+
+.complexitySection h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-md);
+}
+
+.complexityGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.complexityItem {
+  background: #f8f9fa;
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.complexityLabel {
+  font-size: 13px;
+  color: #8c9cac;
+  font-weight: 500;
+}
+
+.complexityValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.bestForSection h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-md);
+}
+
+.bestForSection ul {
+  list-style: none;
+  padding: 0;
+}
+
+.bestForSection li {
+  padding: var(--spacing-sm);
+  background: #e6f2ff;
+  border-radius: 6px;
+  margin-bottom: var(--spacing-xs);
+  padding-left: 32px;
+  position: relative;
+  color: #2c3e50;
+}
+
+.bestForSection li::before {
+  content: '🎯';
+  position: absolute;
+  left: 8px;
+}
+
+.comparisonTable {
+  background: white;
+  border-radius: 12px;
+  padding: var(--spacing-xl);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: var(--spacing-xl);
+}
+
+.comparisonTable h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-lg);
+}
+
+.comparisonTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  padding: var(--spacing-md);
+  text-align: left;
+  border-bottom: 1px solid #e8ecf1;
+}
+
+.comparisonTable th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.comparisonTable td:first-child {
+  font-weight: 600;
+  color: #5a6c7d;
+}
+
+.excellent {
+  color: #52c41a;
+  font-weight: 600;
+}
+
+.good {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+.poor {
+  color: #fa541c;
+  font-weight: 600;
+}
+
+.conclusion {
+  background: white;
+  border-radius: 12px;
+  padding: var(--spacing-xl);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.conclusion h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-lg);
+}
+
+.insight {
+  background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+  border-left: 4px solid #1890ff;
+}
+
+.insight p {
+  font-weight: 600;
+  color: #0050b3;
+  margin-bottom: var(--spacing-md);
+}
+
+.insight ul {
+  list-style: none;
+  padding: 0;
+}
+
+.insight li {
+  padding: var(--spacing-xs) 0;
+  padding-left: 24px;
+  position: relative;
+  color: #003a8c;
+}
+
+.insight li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #1890ff;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: var(--spacing-md);
+  }
+  
+  .prosConsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .complexityGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .comparisonTable {
+    overflow-x: auto;
+  }
+}

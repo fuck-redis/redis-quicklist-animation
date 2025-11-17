@@ -1,0 +1,400 @@
+.tutorialPage {
+  display: flex;
+  min-height: calc(100vh - 64px);
+  background: #f8f9fa;
+}
+
+.sidebar {
+  width: 280px;
+  background: white;
+  border-right: 1px solid #e8ecf1;
+  padding: var(--spacing-lg);
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+
+.sidebarTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-md);
+}
+
+.stepList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.sidebarStep {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebarStep:hover {
+  background: #f8f9fa;
+}
+
+.sidebarStep.active {
+  background: #e6f2ff;
+  color: #667eea;
+}
+
+.sidebarStep.completed .stepNumber {
+  background: #52c41a;
+  color: white;
+}
+
+.stepNumber {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e8ecf1;
+  color: #5a6c7d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.sidebarStep.active .stepNumber {
+  background: #667eea;
+  color: white;
+}
+
+.stepTitle {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.content {
+  flex: 1;
+  padding: var(--spacing-xl);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.progressBar {
+  height: 4px;
+  background: #e8ecf1;
+  border-radius: 4px;
+  margin-bottom: var(--spacing-xl);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #52c41a);
+  transition: width 0.3s ease;
+}
+
+.stepHeader {
+  margin-bottom: var(--spacing-xl);
+}
+
+.stepBadge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #e6f2ff;
+  color: #667eea;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.stepContent {
+  background: white;
+  padding: var(--spacing-xl);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.8;
+}
+
+.stepContent h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: var(--spacing-lg) 0 var(--spacing-md);
+}
+
+.stepContent h4:first-child {
+  margin-top: 0;
+}
+
+.stepContent h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #34495e;
+  margin: var(--spacing-md) 0 var(--spacing-sm);
+}
+
+.stepContent p {
+  margin-bottom: var(--spacing-md);
+  color: #5a6c7d;
+}
+
+.stepContent ul {
+  margin: var(--spacing-md) 0;
+  padding-left: var(--spacing-lg);
+}
+
+.stepContent li {
+  margin: var(--spacing-xs) 0;
+  color: #5a6c7d;
+}
+
+.stepContent strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.stepContent code {
+  background: #f6f8fb;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: var(--font-code);
+  font-size: 0.9em;
+  color: #d73a49;
+}
+
+.diagram,
+.compressDemo,
+.compressStrategy {
+  background: #1e1e1e;
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  margin: var(--spacing-md) 0;
+  overflow-x: auto;
+}
+
+.diagram pre,
+.compressDemo pre,
+.compressStrategy pre {
+  color: #d4d4d4;
+  font-family: var(--font-code);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.codeBlock {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin: var(--spacing-md) 0;
+}
+
+.advantage {
+  background: #f6ffed;
+  border-left: 4px solid #52c41a;
+  padding: var(--spacing-md);
+  border-radius: 4px;
+  margin: var(--spacing-md) 0;
+}
+
+.advantage p {
+  font-weight: 600;
+  color: #52c41a;
+  margin-bottom: var(--spacing-sm);
+}
+
+.configTable table,
+.performanceTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-md) 0;
+}
+
+.configTable th,
+.configTable td,
+.performanceTable th,
+.performanceTable td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-align: left;
+  border: 1px solid #e8ecf1;
+}
+
+.configTable th,
+.performanceTable th {
+  background: #667eea;
+  color: white;
+  font-weight: 600;
+}
+
+.configTable tr:nth-child(even),
+.performanceTable tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+.operationSteps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
+
+.step {
+  background: #f8f9fa;
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.step strong {
+  display: block;
+  color: #667eea;
+  margin-bottom: var(--spacing-xs);
+}
+
+.step p {
+  margin-bottom: var(--spacing-xs);
+}
+
+.step pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: var(--spacing-sm);
+  border-radius: 4px;
+  font-family: var(--font-code);
+  font-size: 12px;
+  overflow-x: auto;
+}
+
+.commandSection {
+  margin: var(--spacing-lg) 0;
+}
+
+.commandSection h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-sm);
+}
+
+.keyPoints {
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.keyPoints h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #d46b08;
+  margin-bottom: var(--spacing-md);
+}
+
+.keyPoints ul {
+  list-style: none;
+  padding: 0;
+}
+
+.keyPoints li {
+  padding: var(--spacing-xs) 0;
+  color: #874d00;
+  position: relative;
+  padding-left: 24px;
+}
+
+.keyPoints li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #fa8c16;
+  font-weight: bold;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.prevButton,
+.nextButton,
+.finishButton {
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.prevButton {
+  background: white;
+  color: #5a6c7d;
+  border: 2px solid #e8ecf1;
+}
+
+.prevButton:hover:not(:disabled) {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.prevButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nextButton,
+.finishButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.nextButton:hover,
+.finishButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+@media (max-width: 768px) {
+  .tutorialPage {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid #e8ecf1;
+  }
+  
+  .content {
+    padding: var(--spacing-md);
+  }
+  
+  .navigation {
+    flex-direction: column;
+  }
+  
+  .prevButton,
+  .nextButton,
+  .finishButton {
+    width: 100%;
+  }
+}

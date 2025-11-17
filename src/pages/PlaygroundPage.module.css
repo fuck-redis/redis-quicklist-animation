@@ -1,0 +1,438 @@
+.playgroundPage {
+  height: calc(100vh - 64px);
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pageHeader {
+  background: white;
+  border-bottom: 1px solid #e8ecf1;
+  padding: var(--spacing-md) var(--spacing-xl);
+  flex-shrink: 0;
+}
+
+.headerContent {
+  margin-bottom: var(--spacing-sm);
+}
+
+.headerContent h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-xs);
+}
+
+.headerContent p {
+  color: #5a6c7d;
+  font-size: 16px;
+}
+
+.statsBar {
+  display: flex;
+  gap: var(--spacing-xl);
+  justify-content: center;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: #8c9cac;
+  font-weight: 500;
+}
+
+.statValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: #667eea;
+}
+
+.statHint {
+  font-size: 11px;
+  color: #b4bcc6;
+}
+
+.playground {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+}
+
+.visualizationSection {
+  background: white;
+  border-radius: 0;
+  border-right: 1px solid #e8ecf1;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.controlSection {
+  background: white;
+  border-radius: 0;
+  overflow-y: auto;
+  height: 100%;
+  border-left: 1px solid #e8ecf1;
+}
+
+@media (max-width: 1200px) {
+  .playground {
+    grid-template-columns: 1fr;
+  }
+  
+  .controlSection {
+    order: -1;
+  }
+}
+
+/* 新手引导样式 */
+.guideOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: var(--spacing-lg);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.guideCard {
+  background: white;
+  border-radius: 16px;
+  padding: var(--spacing-xl);
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.guideClose {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f0f0;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.guideClose:hover {
+  background: #e0e0e0;
+  transform: rotate(90deg);
+}
+
+.guideCard h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.guideSteps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.guideStep {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: #f8f9fa;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.guideStep:hover {
+  background: #e6f7ff;
+  transform: translateX(4px);
+}
+
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.stepContent h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stepContent p {
+  color: #5a6c7d;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xs);
+}
+
+.hint {
+  color: #fa8c16 !important;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.guideButton {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.guideButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* 区域说明样式 */
+.areaIntro {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.introCard {
+  background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  border: 2px solid #e6f2ff;
+}
+
+.introCard h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: var(--spacing-md);
+}
+
+.introCard p {
+  color: #5a6c7d;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.introCard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.introCard li {
+  padding: var(--spacing-xs) 0;
+  padding-left: 24px;
+  position: relative;
+  color: #5a6c7d;
+  line-height: 1.6;
+}
+
+.introCard li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* 区域标签 */
+.sectionLabel {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.labelIcon {
+  font-size: 20px;
+}
+
+.labelHint {
+  margin-left: auto;
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* 底部提示 */
+.bottomTips {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.tipCard {
+  background: #fffbe6;
+  border-left: 4px solid #faad14;
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+}
+
+.tipCard strong {
+  display: block;
+  font-size: 16px;
+  color: #d48806;
+  margin-bottom: var(--spacing-md);
+}
+
+.tipCard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tipCard li {
+  padding: var(--spacing-xs) 0;
+  padding-left: 20px;
+  position: relative;
+  color: #5a6c7d;
+  line-height: 1.6;
+}
+
+.tipCard li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #faad14;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* 帮助按钮 */
+.helpButton {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.helpButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+}
+
+@media (max-width: 768px) {
+  .pageHeader {
+    padding: var(--spacing-md);
+  }
+  
+  .headerContent h1 {
+    font-size: 24px;
+  }
+  
+  .statsBar {
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+  
+  .playground {
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+  
+  .areaIntro {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-md);
+  }
+  
+  .bottomTips {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-md);
+  }
+  
+  .guideCard {
+    padding: var(--spacing-lg);
+  }
+  
+  .labelHint {
+    display: none;
+  }
+  
+  .helpButton {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
