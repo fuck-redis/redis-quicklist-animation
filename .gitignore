@@ -13,6 +13,9 @@ dist-ssr
 build
 *.local
 
+# Vite
+.vite
+
 # Testing
 /coverage
 .nyc_output

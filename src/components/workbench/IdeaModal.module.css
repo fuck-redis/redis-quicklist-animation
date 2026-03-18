@@ -1,0 +1,46 @@
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: grid;
+  place-items: center;
+  z-index: 80;
+}
+
+.modal {
+  width: min(720px, 90vw);
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  box-shadow: 0 20px 36px rgba(15, 23, 42, 0.22);
+  padding: 18px 18px 14px;
+}
+
+.title {
+  margin: 0;
+  color: #111827;
+  font-size: 20px;
+}
+
+.list {
+  margin: 10px 0;
+  padding-left: 18px;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.55;
+  display: grid;
+  gap: 5px;
+}
+
+.closeButton {
+  border: 1px solid #0f766e;
+  background: #ccfbf1;
+  color: #0f766e;
+  border-radius: 999px;
+  height: 34px;
+  min-width: 120px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 14px;
+  cursor: pointer;
+}

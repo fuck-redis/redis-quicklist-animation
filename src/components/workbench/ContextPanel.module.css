@@ -1,0 +1,76 @@
+.panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+  height: 100%;
+}
+
+.header {
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #d1d5db;
+}
+
+.title {
+  margin: 0;
+  color: #111827;
+  font-size: 14px;
+}
+
+.description {
+  margin: 6px 0 0;
+  color: #4b5563;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.metricItem {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 7px 8px;
+  background: #f8fafc;
+  display: grid;
+  gap: 3px;
+}
+
+.metricLabel {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.metricValue {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1f2937;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.timeline {
+  border-top: 1px dashed #d1d5db;
+  padding-top: 8px;
+}
+
+.timelineTitle {
+  font-size: 11px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.timelineBadge {
+  display: inline-block;
+  border: 1px solid #2dd4bf;
+  background: #ecfeff;
+  color: #0f766e;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+}

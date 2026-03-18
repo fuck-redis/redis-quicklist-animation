@@ -1,0 +1,40 @@
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 8px;
+  padding: 8px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.tab {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #374151;
+  padding: 8px 10px;
+  cursor: pointer;
+  text-align: left;
+  display: grid;
+  gap: 4px;
+}
+
+.tab:hover {
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.12);
+}
+
+.active {
+  border-color: #0f766e;
+  background: #ecfeff;
+}
+
+.tabTitle {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tabDesc {
+  font-size: 11px;
+  color: #6b7280;
+}

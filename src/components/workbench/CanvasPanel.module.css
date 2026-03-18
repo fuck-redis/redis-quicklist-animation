@@ -1,0 +1,211 @@
+.panel {
+  position: relative;
+  height: 100%;
+  background: linear-gradient(170deg, #f8fafc 0%, #fffbeb 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  display: block;
+}
+
+.svg:active {
+  cursor: grabbing;
+}
+
+.nodeBox {
+  fill: #ffffff;
+  stroke: #94a3b8;
+  stroke-width: 2;
+}
+
+.focusedNode {
+  stroke: #0f766e;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 6px rgba(15, 118, 110, 0.35));
+}
+
+.compressedNode {
+  fill: #f3f4f6;
+  stroke: #9ca3af;
+}
+
+.nodeTitle {
+  font-size: 13px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: #111827;
+}
+
+.nodeMeta {
+  font-size: 11px;
+  text-anchor: middle;
+  fill: #6b7280;
+}
+
+.entryBox {
+  fill: #fef3c7;
+  stroke: #f59e0b;
+  stroke-width: 1.3;
+}
+
+.focusedEntry {
+  fill: #bbf7d0;
+  stroke: #16a34a;
+  stroke-width: 2;
+}
+
+.entryText {
+  font-size: 11px;
+  fill: #6b7280;
+  text-anchor: middle;
+}
+
+.entryValue {
+  font-size: 12px;
+  fill: #111827;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.entrySize {
+  font-size: 10px;
+  fill: #6b7280;
+  text-anchor: middle;
+}
+
+.linkArrow {
+  stroke: #64748b;
+  stroke-width: 1.6;
+}
+
+.flowArrow {
+  stroke: #0f766e;
+  stroke-width: 2;
+}
+
+.flowLabel {
+  fill: #0f766e;
+  font-size: 11px;
+  text-anchor: middle;
+  font-weight: 700;
+}
+
+.nullNode {
+  fill: #f3f4f6;
+  stroke: #94a3b8;
+  stroke-dasharray: 4 3;
+}
+
+.nullLabel {
+  text-anchor: middle;
+  font-size: 12px;
+  font-weight: 700;
+  fill: #64748b;
+}
+
+.pointerLabel {
+  text-anchor: middle;
+  font-size: 12px;
+  font-weight: 800;
+  fill: #0369a1;
+}
+
+.annotationInfo,
+.annotationSuccess,
+.annotationWarn {
+  font-size: 12px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.annotationInfo {
+  fill: #0f766e;
+}
+
+.annotationSuccess {
+  fill: #15803d;
+}
+
+.annotationWarn {
+  fill: #b45309;
+}
+
+.overlayLeft,
+.overlayRight {
+  position: absolute;
+  top: 12px;
+  width: 220px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(3px);
+  padding: 8px;
+}
+
+.overlayLeft {
+  left: 12px;
+}
+
+.overlayRight {
+  right: 12px;
+}
+
+.overlayTitle {
+  font-size: 11px;
+  font-weight: 800;
+  color: #374151;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+
+.stack,
+.vars {
+  display: grid;
+  gap: 4px;
+}
+
+.stackItem,
+.varRow {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 11px;
+  color: #1f2937;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.varRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.varKey {
+  color: #6b7280;
+  margin-right: 8px;
+}
+
+.varValue {
+  color: #111827;
+  font-weight: 700;
+  text-align: right;
+}
+
+.canvasHint {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #475569;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 4px 12px;
+}

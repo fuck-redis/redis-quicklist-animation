@@ -2,9 +2,7 @@ import {
   QuickListState,
   QuickListNode,
   QuickListConfig,
-  OperationParams,
   QuickListOperationRecord,
-  QuickListOperationType,
   DEFAULT_CONFIG,
   PerformanceMetrics,
 } from '@/types';

@@ -1,0 +1,128 @@
+.bar {
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 8px 14px 6px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) auto 84px 92px 80px 82px auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.mainInputLabel {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  align-items: center;
+  gap: 8px;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mainInput {
+  height: 30px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  outline: none;
+}
+
+.mainInput:focus {
+  border-color: #0ea5a4;
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.15);
+}
+
+.presets {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.presetButton,
+.randomButton,
+.generateButton {
+  border: 1px solid #d1d5db;
+  background: #f8fafc;
+  color: #374151;
+  border-radius: 999px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0 11px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.presetButton:hover,
+.randomButton:hover,
+.generateButton:hover {
+  border-color: #0ea5a4;
+  color: #0f766e;
+}
+
+.activePreset {
+  border-color: #0f766e;
+  background: #ecfeff;
+  color: #0f766e;
+}
+
+.randomButton {
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: #9a3412;
+}
+
+.generateButton {
+  background: #ccfbf1;
+  border-color: #2dd4bf;
+  color: #115e59;
+}
+
+.compactField {
+  display: grid;
+  grid-template-columns: 1fr;
+  color: #4b5563;
+  font-size: 11px;
+  font-weight: 700;
+  gap: 2px;
+}
+
+.compactInput {
+  height: 28px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0 8px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  outline: none;
+}
+
+.compactInput:focus {
+  border-color: #0ea5a4;
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.12);
+}
+
+.errorLine {
+  min-height: 16px;
+  margin-top: 4px;
+  color: #b45309;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+@media (max-width: 1400px) {
+  .row {
+    grid-template-columns: minmax(240px, 1fr) auto repeat(4, 78px) auto;
+  }
+
+  .presetButton,
+  .randomButton,
+  .generateButton {
+    padding: 0 8px;
+  }
+}

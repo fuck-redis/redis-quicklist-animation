@@ -1,0 +1,126 @@
+.panel {
+  height: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #e2e8f0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+}
+
+.topBar {
+  border-bottom: 1px solid #1e293b;
+  padding: 10px 10px 8px;
+  background: linear-gradient(180deg, #111827 0%, #0f172a 100%);
+}
+
+.titleBlock {
+  margin-bottom: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: 14px;
+  color: #f8fafc;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.languageSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.langButton {
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #cbd5e1;
+  border-radius: 999px;
+  height: 26px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.langButton:hover {
+  border-color: #2dd4bf;
+  color: #99f6e4;
+}
+
+.activeLang {
+  border-color: #14b8a6;
+  color: #99f6e4;
+  background: rgba(15, 118, 110, 0.35);
+}
+
+.codeViewport {
+  overflow: auto;
+  padding: 8px 0;
+}
+
+.codeLine {
+  display: grid;
+  grid-template-columns: 36px 1fr minmax(110px, 160px);
+  gap: 8px;
+  align-items: baseline;
+  padding: 2px 10px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  min-height: 23px;
+}
+
+.codeLine:nth-child(2n) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.activeLine {
+  background: rgba(20, 184, 166, 0.18) !important;
+}
+
+.lineNo {
+  color: #64748b;
+  text-align: right;
+  user-select: none;
+}
+
+.lineText {
+  white-space: pre;
+}
+
+.lineNote {
+  color: #fbbf24;
+  font-size: 11px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.normal {
+  color: #e2e8f0;
+}
+
+.keyword {
+  color: #22d3ee;
+  font-weight: 700;
+}
+
+.string {
+  color: #facc15;
+}
+
+.number {
+  color: #fb7185;
+}
+
+.comment {
+  color: #64748b;
+}
