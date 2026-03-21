@@ -109,6 +109,10 @@ export const HomePage: React.FC = () => {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* Animation Showcase */}
+      <section className={styles.animationShowcase}>
         <HeroAnimation />
       </section>
 

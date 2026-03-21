@@ -219,9 +219,10 @@ export function pushBackByBytes(model: QuickListModel, value: number | string, f
     if (createdNode && target.entries.length >= 2) {
       const moveCount = Math.floor(target.entries.length / 2);
       const moved = target.entries.splice(target.entries.length - moveCount, moveCount);
+      const nodeToUpdate = createdNode;
       moved.forEach((item) => {
         movedEntryIds.push(item.id);
-        createdNode.entries.push(item);
+        nodeToUpdate.entries.push(item);
       });
     }
 

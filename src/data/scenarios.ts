@@ -22,6 +22,41 @@ export const SCENARIO_PRESETS: ScenarioPreset[] = [
     values: ['msg-A', 'msg-B', 'msg-C', 'msg-D', 'msg-E', 'msg-F', 'msg-G', 'msg-H', 'msg-I'],
     queuePopCount: 2,
   },
+  {
+    key: 'merge-demo',
+    label: '节点合并',
+    hint: '删除元素后相邻节点合并演示',
+    values: [1, 2, 3, 4, 5, 6, 7, 8],
+    queuePopCount: 6,
+  },
+  {
+    key: 'large-payload',
+    label: '大字符串',
+    hint: '大字节数据观察 fill 限制',
+    values: ['short', 'medium-size', 'very-long-string-payload', 'tiny', 'another-long-content'],
+    queuePopCount: 2,
+  },
+  {
+    key: 'mixed-types',
+    label: '混合数据类型',
+    hint: '整数和字符串混合存储',
+    values: [100, 'hello', 200, 'world', 300, 'redis', 400],
+    queuePopCount: 2,
+  },
+  {
+    key: 'head-insert',
+    label: '头部插入模式',
+    hint: '模拟 LPUSH 场景',
+    values: ['a', 'b', 'c', 'd', 'e'],
+    queuePopCount: 2,
+  },
+  {
+    key: 'stress-test',
+    label: '压力测试',
+    hint: '大量数据观察节点管理',
+    values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    queuePopCount: 4,
+  },
 ];
 
 export function parseValuesInput(raw: string): Array<number | string> {
