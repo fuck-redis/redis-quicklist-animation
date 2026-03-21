@@ -170,6 +170,8 @@ export const QuickListWorkbench: React.FC = () => {
             progress={activePlayback.progress}
             isPlaying={activePlayback.isPlaying}
             speed={speed}
+            stepTitle={activeStep.title}
+            stepStage={activeStep.stage}
             onSpeedChange={(value) => setSpeed(value)}
             onPrev={activePlayback.prev}
             onNext={activePlayback.next}

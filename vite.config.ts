@@ -18,7 +18,10 @@ export default defineConfig({
     },
   },
   server: {
-    port: 23714,
-    open: true,
+    port: 5173,
+    open: false,
+    historyApiFallback: {
+      index: '/redis-quicklist-animation/index.html'
+    }
   },
 });

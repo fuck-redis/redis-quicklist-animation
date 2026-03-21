@@ -10,14 +10,17 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "@remotion/player": "^4.0.438",
     "d3": "^7.8.5",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.9.6",
+    "remotion": "^4.0.438",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@types/d3": "^7.4.3",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",

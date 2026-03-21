@@ -2,8 +2,9 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-bottom: 3px solid #DC382D;
 }
 
 .container {
@@ -13,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 60px;
 }
 
 .logo {
@@ -37,6 +38,7 @@
 
 .logoText {
   font-weight: 700;
+  color: white;
 }
 
 .navLinks {
@@ -51,7 +53,7 @@
   padding: 8px 16px;
   border-radius: 8px;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s;
@@ -59,12 +61,12 @@
 }
 
 .navLink:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(220, 56, 45, 0.2);
   color: white;
 }
 
 .navLink.active {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(220, 56, 45, 0.3);
   color: white;
 }
 
@@ -74,8 +76,8 @@
   bottom: -2px;
   left: 16px;
   right: 16px;
-  height: 2px;
-  background: white;
+  height: 3px;
+  background: #DC382D;
   border-radius: 2px;
 }
 
@@ -87,15 +89,15 @@
   .logoText {
     display: none;
   }
-  
+
   .navLinks {
     gap: 4px;
   }
-  
+
   .navLink span:not(.navIcon) {
     display: none;
   }
-  
+
   .navLink {
     padding: 8px 12px;
   }

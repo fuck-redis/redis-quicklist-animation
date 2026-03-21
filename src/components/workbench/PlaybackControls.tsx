@@ -7,6 +7,8 @@ interface PlaybackControlsProps {
   progress: number;
   isPlaying: boolean;
   speed: number;
+  stepTitle?: string;
+  stepStage?: string;
   onSpeedChange: (speed: number) => void;
   onPrev: () => void;
   onNext: () => void;
@@ -17,12 +19,28 @@ interface PlaybackControlsProps {
 
 const SPEEDS = [0.5, 0.8, 1, 1.25, 1.5, 2];
 
+// 阶段图标映射
+const STAGE_ICONS: Record<string, string> = {
+  'init': '🚀',
+  'push.locateTail': '📍',
+  'push.split': '⚡',
+  'push.createNode': '➕',
+  'push.insert': '✅',
+  'compress.scan': '🔍',
+  'compress.apply': '🗜️',
+  'pop.remove': '🗑️',
+  'pop.dropNode': '✂️',
+  'pop.merge': '🔗',
+};
+
 export const PlaybackControls: React.FC<PlaybackControlsProps> = ({
   currentIndex,
   total,
   progress,
   isPlaying,
   speed,
+  stepTitle,
+  stepStage,
   onSpeedChange,
   onPrev,
   onNext,
@@ -32,6 +50,7 @@ export const PlaybackControls: React.FC<PlaybackControlsProps> = ({
 }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
+  const stageIcon = stepStage ? STAGE_ICONS[stepStage] || '📋' : '📋';
 
   const seekByClientX = useCallback(
     (clientX: number) => {
@@ -68,19 +87,20 @@ export const PlaybackControls: React.FC<PlaybackControlsProps> = ({
     <section className={styles.panel}>
       <div className={styles.buttonRow}>
         <button type="button" className={styles.actionButton} onClick={onPrev} title="ArrowLeft">
-          上一步 ←
+          ← 上一步
+        </button>
+        <button type="button" className={styles.playButton} onClick={onTogglePlay} title="Space">
+          {isPlaying ? '⏸ 暂停' : '▶ 播放'}
         </button>
         <button type="button" className={styles.actionButton} onClick={onNext} title="ArrowRight">
           下一步 →
         </button>
-        <button type="button" className={styles.playButton} onClick={onTogglePlay} title="Space">
-          {isPlaying ? '暂停 Space' : '播放 Space'}
-        </button>
         <button type="button" className={styles.actionButton} onClick={onReset} title="R">
-          重置 R
+          🔄 重置
         </button>
 
         <div className={styles.speedBlock}>
+          <span className={styles.speedLabel}>速度:</span>
           {SPEEDS.map((item) => (
             <button
               key={item}
@@ -93,10 +113,18 @@ export const PlaybackControls: React.FC<PlaybackControlsProps> = ({
           ))}
         </div>
 
-        <div className={styles.position}>
-          {currentIndex + 1}/{Math.max(total, 1)}
+        <div className={styles.stepInfo}>
+          <span className={styles.stepIcon}>{stageIcon}</span>
+          <span className={styles.stepNumber}>步骤 {currentIndex + 1}/{Math.max(total, 1)}</span>
         </div>
       </div>
+
+      {/* 当前步骤标题 */}
+      {stepTitle && (
+        <div className={styles.currentStep}>
+          {stepTitle}
+        </div>
+      )}
 
       <div
         ref={trackRef}
@@ -108,6 +136,14 @@ export const PlaybackControls: React.FC<PlaybackControlsProps> = ({
       >
         <div className={styles.progressPlayed} style={{ width: `${progress}%` }} />
         <div className={styles.progressHandle} style={{ left: `${progress}%` }} />
+        {/* 步骤标记点 */}
+        {Array.from({ length: total }, (_, i) => (
+          <div
+            key={i}
+            className={`${styles.stepDot} ${i === currentIndex ? styles.stepDotActive : i < currentIndex ? styles.stepDotDone : ''}`}
+            style={{ left: `${(i / Math.max(total - 1, 1)) * 100}%` }}
+          />
+        ))}
       </div>
     </section>
   );

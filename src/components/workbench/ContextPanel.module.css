@@ -2,55 +2,151 @@
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   background: #ffffff;
-  padding: 10px;
+  padding: 12px;
   display: grid;
-  gap: 10px;
+  gap: 12px;
   height: 100%;
+  overflow-y: auto;
 }
 
 .header {
-  padding-bottom: 8px;
+  padding-bottom: 10px;
   border-bottom: 1px dashed #d1d5db;
 }
 
-.title {
-  margin: 0;
-  color: #111827;
+.stageBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eff6ff;
+  border: 1px solid #3b82f6;
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: 8px;
+}
+
+.stageIcon {
   font-size: 14px;
 }
 
-.description {
-  margin: 6px 0 0;
-  color: #4b5563;
+.stageLabel {
   font-size: 12px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.title {
+  margin: 0 0 4px;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.description {
+  margin: 0;
+  color: #374151;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.stageDesc {
+  margin: 6px 0 0;
+  padding: 8px;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #166534;
   line-height: 1.4;
 }
 
+/* 数据结构说明 */
+.dataStructure {
+  background: #fefce8;
+  border: 1px solid #fef08a;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.dsTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: #854d0e;
+  margin-bottom: 8px;
+}
+
+.dsContent {
+  display: grid;
+  gap: 6px;
+}
+
+.dsItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #374151;
+}
+
+.dsIcon {
+  font-size: 14px;
+}
+
+/* 指标网格 */
 .metricsGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  grid-template-columns: repeat(2, minmax(90px, 1fr));
   gap: 8px;
 }
 
 .metricItem {
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  padding: 7px 8px;
+  padding: 8px;
   background: #f8fafc;
-  display: grid;
-  gap: 3px;
 }
 
 .metricLabel {
   font-size: 11px;
-  color: #6b7280;
+  color: #64748b;
+  display: block;
 }
 
 .metricValue {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  color: #1f2937;
+  color: #1e293b;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* 聚焦信息 */
+.focusInfo {
+  background: #f0f9ff;
+  border: 1px solid #7dd3fc;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.focusTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0369a1;
+  margin-bottom: 6px;
+}
+
+.focusNodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.focusBadge {
+  background: #0284c7;
+  color: white;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .timeline {

@@ -22,16 +22,6 @@ interface LayoutNode {
   entryPositions: Record<string, Point>;
 }
 
-function toneClassName(tone: 'info' | 'success' | 'warn' | undefined): string {
-  if (tone === 'success') {
-    return styles.annotationSuccess;
-  }
-  if (tone === 'warn') {
-    return styles.annotationWarn;
-  }
-  return styles.annotationInfo;
-}
-
 export const CanvasPanel: React.FC<CanvasPanelProps> = ({ step }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -88,16 +78,22 @@ export const CanvasPanel: React.FC<CanvasPanelProps> = ({ step }) => {
     const baseY = 0;
     const startX = -((Math.max(orderedNodes.length, 1) - 1) * gapX) / 2;
 
+    // 固定布局参数，确保一致性
+    const headerAreaHeight = 48;     // 节点标题区域高度
+    const entryRowHeight = 26;      // 每个entry行的高度
+    const entryStartOffset = 56;    // entry内容区起始Y偏移（相对节点顶部）
+
     orderedNodes.forEach((node, idx) => {
       const x = startX + idx * gapX;
       const y = baseY;
-      const height = 64 + Math.max(node.entries.length, 1) * 24;
+      // 动态计算节点高度：头部区域 + entry行 + 底部留白
+      const height = headerAreaHeight + Math.max(node.entries.length, 1) * entryRowHeight + 12;
 
       const entryPositions: Record<string, Point> = {};
       node.entries.forEach((entry, entryIdx) => {
         entryPositions[entry.id] = {
           x,
-          y: y - height / 2 + 52 + entryIdx * 24,
+          y: y - height / 2 + entryStartOffset + entryIdx * entryRowHeight,
         };
         pointMap[`entry:${entry.id}`] = entryPositions[entry.id];
       });
@@ -155,15 +151,33 @@ export const CanvasPanel: React.FC<CanvasPanelProps> = ({ step }) => {
         />
 
         <g transform={transform.toString()}>
+          {/* 当前操作提示 */}
+          <g>
+            <rect x={-160} y={-130} width={320} height={36} rx={18} className={styles.currentStepBadge} />
+            <text x={0} y={-108} textAnchor="middle" dominantBaseline="central" className={styles.currentStepText}>
+              {step.title}
+            </text>
+          </g>
+
           {orderedNodes.length > 0 && (
             <>
-              <rect x={layout.leftNullX - 36} y={-21} width={72} height={42} className={styles.nullNode} />
-              <text x={layout.leftNullX} y={5} className={styles.nullLabel}>
+              {/* HEAD 指针 */}
+              <g>
+                <rect x={layout.leftNullX - 30} y={-50} width={60} height={24} rx={6} className={styles.pointerBadge} />
+                <text x={layout.leftNullX} y={-38} textAnchor="middle" dominantBaseline="central" className={styles.pointerBadgeText}>HEAD</text>
+              </g>
+              <rect x={layout.leftNullX - 30} y={-21} width={60} height={42} className={styles.nullNode} />
+              <text x={layout.leftNullX} y={0} textAnchor="middle" dominantBaseline="central" className={styles.nullLabel}>
                 NULL
               </text>
 
-              <rect x={layout.rightNullX - 36} y={-21} width={72} height={42} className={styles.nullNode} />
-              <text x={layout.rightNullX} y={5} className={styles.nullLabel}>
+              {/* TAIL 指针 */}
+              <g>
+                <rect x={layout.rightNullX - 30} y={-50} width={60} height={24} rx={6} className={styles.pointerBadge} />
+                <text x={layout.rightNullX} y={-38} textAnchor="middle" dominantBaseline="central" className={styles.pointerBadgeText}>TAIL</text>
+              </g>
+              <rect x={layout.rightNullX - 30} y={-21} width={60} height={42} className={styles.nullNode} />
+              <text x={layout.rightNullX} y={0} textAnchor="middle" dominantBaseline="central" className={styles.nullLabel}>
                 NULL
               </text>
             </>
@@ -173,58 +187,102 @@ export const CanvasPanel: React.FC<CanvasPanelProps> = ({ step }) => {
             const nodeData = orderedNodes[idx];
             const focused = step.focusNodeIds.includes(nodeData.id);
             const compressed = nodeData.isCompressed;
+            const nodeTop = nodeLayout.y - nodeLayout.height / 2;
+
             return (
               <g key={nodeData.id}>
+                {/* 节点背景 */}
                 <rect
                   x={nodeLayout.x - nodeLayout.width / 2}
-                  y={nodeLayout.y - nodeLayout.height / 2}
+                  y={nodeTop}
                   width={nodeLayout.width}
                   height={nodeLayout.height}
                   rx={14}
                   className={`${styles.nodeBox} ${compressed ? styles.compressedNode : ''} ${focused ? styles.focusedNode : ''}`}
                 />
-                <text x={nodeLayout.x} y={nodeLayout.y - nodeLayout.height / 2 + 20} className={styles.nodeTitle}>
-                  节点 #{nodeData.index}
-                </text>
-                <text x={nodeLayout.x} y={nodeLayout.y - nodeLayout.height / 2 + 38} className={styles.nodeMeta}>
-                  {compressed ? `压缩 ${Math.round(nodeData.compressionRatio * 100)}%` : '未压缩'}
+
+                {/* ZipList 标签 */}
+                <rect
+                  x={nodeLayout.x - 40}
+                  y={nodeTop + 6}
+                  width={80}
+                  height={18}
+                  rx={4}
+                  className={styles.ziplistBadge}
+                />
+                <text x={nodeLayout.x} y={nodeTop + 18} textAnchor="middle" dominantBaseline="central" className={styles.ziplistBadgeText}>
+                  ZipList
                 </text>
 
-                {nodeData.entries.map((entry, entryIdx) => {
-                  const point = nodeLayout.entryPositions[entry.id];
-                  const focusedEntry = step.focusEntryIds.includes(entry.id);
-                  return (
-                    <g key={entry.id}>
-                      <rect
-                        x={point.x - nodeLayout.width / 2 + 10}
-                        y={point.y - 11}
-                        width={nodeLayout.width - 20}
-                        height={22}
-                        rx={8}
-                        className={`${styles.entryBox} ${focusedEntry ? styles.focusedEntry : ''}`}
-                      />
-                      <text x={point.x - 60} y={point.y + 4} className={styles.entryText}>
-                        e{entryIdx}
-                      </text>
-                      <text x={point.x - 30} y={point.y + 4} className={styles.entryValue}>
-                        {String(entry.value)}
-                      </text>
-                      <text x={point.x + 50} y={point.y + 4} className={styles.entrySize}>
-                        {entry.bytes}B
-                      </text>
-                    </g>
-                  );
-                })}
+                {/* 节点标题 */}
+                <text x={nodeLayout.x} y={nodeTop + 38} textAnchor="middle" className={styles.nodeTitle}>
+                  #{nodeData.index}
+                </text>
+                <text x={nodeLayout.x} y={nodeTop + 52} textAnchor="middle" className={styles.nodeMeta}>
+                  {nodeData.entries.length} 个元素
+                </text>
 
-                {idx === 0 && (
-                  <text x={nodeLayout.x} y={nodeLayout.y - nodeLayout.height / 2 - 10} className={styles.pointerLabel}>
-                    HEAD
+                {/* Entries 列表 */}
+                {nodeData.entries.length > 0 && (
+                  <g>
+                    {nodeData.entries.map((entry, entryIdx) => {
+                      const point = nodeLayout.entryPositions[entry.id];
+                      const focusedEntry = step.focusEntryIds.includes(entry.id);
+                      const entryBoxX = nodeLayout.x - nodeLayout.width / 2 + 12;
+                      const entryBoxWidth = nodeLayout.width - 24;
+                      return (
+                        <g key={entry.id}>
+                          <rect
+                            x={entryBoxX}
+                            y={point.y - 10}
+                            width={entryBoxWidth}
+                            height={20}
+                            rx={6}
+                            className={`${styles.entryBox} ${focusedEntry ? styles.focusedEntry : ''}`}
+                          />
+                          <text x={entryBoxX + 8} y={point.y + 1} className={styles.entryIndex}>
+                            [{entryIdx}]
+                          </text>
+                          <text x={entryBoxX + 40} y={point.y + 1} className={styles.entryValue}>
+                            {String(entry.value).substring(0, 8)}
+                          </text>
+                          <text x={entryBoxX + entryBoxWidth - 6} y={point.y + 1} className={styles.entrySize} textAnchor="end">
+                            {entry.bytes}B
+                          </text>
+                        </g>
+                      );
+                    })}
+                  </g>
+                )}
+
+                {/* 空节点提示 */}
+                {nodeData.entries.length === 0 && (
+                  <text x={nodeLayout.x} y={nodeTop + 80} textAnchor="middle" className={styles.emptyNode}>
+                    (空)
                   </text>
                 )}
-                {idx === layout.nodes.length - 1 && (
-                  <text x={nodeLayout.x} y={nodeLayout.y - nodeLayout.height / 2 - 10} className={styles.pointerLabel}>
-                    TAIL
-                  </text>
+
+                {/* 压缩标记 */}
+                {compressed && (
+                  <g>
+                    <rect
+                      x={nodeLayout.x + nodeLayout.width / 2 - 28}
+                      y={nodeTop + 4}
+                      width={24}
+                      height={20}
+                      rx={4}
+                      className={styles.compressedBadge}
+                    />
+                    <text
+                      x={nodeLayout.x + nodeLayout.width / 2 - 16}
+                      y={nodeTop + 12}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      className={styles.compressedBadgeText}
+                    >
+                      LZF
+                    </text>
+                  </g>
                 )}
               </g>
             );
@@ -235,24 +293,37 @@ export const CanvasPanel: React.FC<CanvasPanelProps> = ({ step }) => {
               return null;
             }
             const next = layout.nodes[idx + 1];
+            const currentCenterY = nodeLayout.y;
+            const nextCenterY = next.y;
+            const midX = (nodeLayout.x + nodeLayout.width / 2 + next.x - next.width / 2) / 2;
+
             return (
               <g key={`${nodeLayout.id}-link`}>
+                {/* NEXT 指针（从上往下） */}
                 <line
                   x1={nodeLayout.x + nodeLayout.width / 2}
-                  y1={nodeLayout.y - 10}
+                  y1={currentCenterY}
                   x2={next.x - next.width / 2}
-                  y2={next.y - 10}
-                  className={styles.linkArrow}
+                  y2={nextCenterY}
+                  className={styles.nextArrow}
                   markerEnd="url(#arrow-info)"
                 />
+                {/* NEXT 标签 */}
+                <rect x={midX - 22} y={currentCenterY - 28} width={44} height={18} rx={9} className={styles.arrowLabelBadge} />
+                <text x={midX} y={currentCenterY - 16} textAnchor="middle" dominantBaseline="central" className={styles.arrowLabelText}>NEXT</text>
+
+                {/* PREV 指针（从下往上） */}
                 <line
                   x1={next.x - next.width / 2}
-                  y1={next.y + 10}
+                  y1={nextCenterY}
                   x2={nodeLayout.x + nodeLayout.width / 2}
-                  y2={nodeLayout.y + 10}
-                  className={styles.linkArrow}
+                  y2={currentCenterY}
+                  className={styles.prevArrow}
                   markerEnd="url(#arrow-info)"
                 />
+                {/* PREV 标签 */}
+                <rect x={midX - 22} y={currentCenterY + 12} width={44} height={18} rx={9} className={styles.arrowLabelBadgePrev} />
+                <text x={midX} y={currentCenterY + 24} textAnchor="middle" dominantBaseline="central" className={styles.arrowLabelTextPrev}>PREV</text>
               </g>
             );
           })}
@@ -269,20 +340,49 @@ export const CanvasPanel: React.FC<CanvasPanelProps> = ({ step }) => {
               : flow.tone === 'success'
               ? 'url(#arrow-success)'
               : 'url(#arrow-info)';
-            const midX = (from.x + to.x) / 2;
-            const midY = (from.y + to.y) / 2 - 12;
+
+            const toneClass = flow.tone === 'warn'
+              ? styles.flowArrowWarn
+              : flow.tone === 'success'
+              ? styles.flowArrowSuccess
+              : styles.flowArrow;
+
+            // 计算箭头的起点和终点，稍微内缩以避免覆盖节点
+            const dx = to.x - from.x;
+            const dy = to.y - from.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const shrink = 40; // 从起点和终点各收缩的距离
+            const startX = from.x + (dx / dist) * shrink;
+            const startY = from.y + (dy / dist) * shrink;
+            const endX = to.x - (dx / dist) * (shrink + 10);
+            const endY = to.y - (dy / dist) * (shrink + 10);
+
+            const midX = (startX + endX) / 2;
+            const midY = (startY + endY) / 2;
 
             return (
               <g key={`flow-${index}`}>
+                {/* 箭头线 */}
                 <line
-                  x1={from.x}
-                  y1={from.y}
-                  x2={to.x}
-                  y2={to.y}
-                  className={styles.flowArrow}
+                  x1={startX}
+                  y1={startY}
+                  x2={endX}
+                  y2={endY}
+                  className={toneClass}
                   markerEnd={marker}
+                  strokeDasharray="8 4"
                 />
-                <text x={midX} y={midY} className={styles.flowLabel}>
+                {/* 标签背景 */}
+                <rect
+                  x={midX - 40}
+                  y={midY - 12}
+                  width={80}
+                  height={24}
+                  rx={12}
+                  className={toneClass === styles.flowArrowWarn ? styles.flowLabelBgWarn : toneClass === styles.flowArrowSuccess ? styles.flowLabelBgSuccess : styles.flowLabelBg}
+                />
+                {/* 标签文字 */}
+                <text x={midX} y={midY + 1} textAnchor="middle" dominantBaseline="central" className={styles.flowLabelText}>
                   {flow.label}
                 </text>
               </g>
@@ -296,10 +396,33 @@ export const CanvasPanel: React.FC<CanvasPanelProps> = ({ step }) => {
             }
             const x = anchor.x + (annotation.dx ?? 0);
             const y = anchor.y + (annotation.dy ?? -22);
+
+            const bgClass = annotation.tone === 'warn'
+              ? styles.annotationBgWarn
+              : annotation.tone === 'success'
+              ? styles.annotationBgSuccess
+              : styles.annotationBg;
+
+            const textClass = annotation.tone === 'warn'
+              ? styles.annotationTextWarn
+              : annotation.tone === 'success'
+              ? styles.annotationTextSuccess
+              : styles.annotationText;
+
             return (
-              <text key={`annotation-${index}`} x={x} y={y} className={toneClassName(annotation.tone)}>
-                {annotation.text}
-              </text>
+              <g key={`annotation-${index}`}>
+                <rect
+                  x={x - 50}
+                  y={y - 10}
+                  width={100}
+                  height={20}
+                  rx={10}
+                  className={bgClass}
+                />
+                <text x={x} y={y + 1} textAnchor="middle" dominantBaseline="central" className={textClass}>
+                  {annotation.text}
+                </text>
+              </g>
             );
           })}
         </g>

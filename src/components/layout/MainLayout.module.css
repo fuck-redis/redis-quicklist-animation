@@ -1,7 +1,7 @@
 .mainLayout {
   display: flex;
-  height: calc(100vh - 60px);
-  overflow: hidden;
+  min-height: calc(100vh - 60px);
+  overflow: visible;
 }
 
 .visualizationArea {
@@ -10,7 +10,7 @@
   flex-direction: column;
   padding: var(--spacing-md);
   gap: var(--spacing-md);
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .controlPanel {
@@ -19,7 +19,7 @@
   border-left: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .section {

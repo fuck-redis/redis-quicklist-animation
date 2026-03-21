@@ -1,54 +1,59 @@
 .tutorialPage {
   display: flex;
-  min-height: calc(100vh - 64px);
-  background: #f8f9fa;
+  min-height: calc(100vh - 60px);
+  background: var(--bg-secondary);
 }
 
 .sidebar {
   width: 280px;
   background: white;
-  border-right: 1px solid #e8ecf1;
-  padding: var(--spacing-lg);
-  position: sticky;
-  top: 64px;
-  height: calc(100vh - 64px);
+  border-right: 1px solid var(--border-color);
+  padding: 24px;
+  flex-shrink: 0;
+  min-height: calc(100vh - 60px);
   overflow-y: auto;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
 }
 
 .sidebarTitle {
   font-size: 16px;
   font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+  margin-bottom: 20px;
 }
 
 .stepList {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: 4px;
 }
 
 .sidebarStep {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm);
+  gap: 12px;
+  padding: 10px 12px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
+  border: 1px solid transparent;
 }
 
 .sidebarStep:hover {
-  background: #f8f9fa;
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
 }
 
 .sidebarStep.active {
-  background: #e6f2ff;
-  color: #667eea;
+  background: #FEE2E2;
+  color: #DC382D;
+  border-color: #FCA5A5;
 }
 
 .sidebarStep.completed .stepNumber {
-  background: #52c41a;
+  background: var(--success-color);
   color: white;
 }
 
@@ -56,8 +61,8 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #e8ecf1;
-  color: #5a6c7d;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,7 +72,7 @@
 }
 
 .sidebarStep.active .stepNumber {
-  background: #667eea;
+  background: #DC382D;
   color: white;
 }
 
@@ -79,54 +84,62 @@
 
 .content {
   flex: 1;
-  padding: var(--spacing-xl);
-  max-width: 900px;
-  margin: 0 auto;
+  padding: 32px;
+  overflow-y: auto;
+  max-width: 1000px;
 }
 
 .progressBar {
   height: 4px;
-  background: #e8ecf1;
+  background: var(--border-color);
   border-radius: 4px;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 32px;
   overflow: hidden;
 }
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea, #52c41a);
+  background: linear-gradient(90deg, #DC382D, #B82E28);
   transition: width 0.3s ease;
 }
 
 .stepHeader {
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 24px;
 }
 
 .stepBadge {
   display: inline-block;
-  padding: 6px 12px;
-  background: #e6f2ff;
-  color: #667eea;
+  padding: 6px 16px;
+  background: #FEE2E2;
+  color: #DC382D;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 12px;
+}
+
+.stepHeader h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
 }
 
 .stepContent {
   background: white;
-  padding: var(--spacing-xl);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: var(--spacing-lg);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 24px;
   line-height: 1.8;
+  border: 1px solid var(--border-color);
 }
 
 .stepContent h4 {
   font-size: 20px;
   font-weight: 600;
-  color: #2c3e50;
-  margin: var(--spacing-lg) 0 var(--spacing-md);
+  color: var(--text-primary);
+  margin: 28px 0 16px;
 }
 
 .stepContent h4:first-child {
@@ -136,204 +149,230 @@
 .stepContent h5 {
   font-size: 16px;
   font-weight: 600;
-  color: #34495e;
-  margin: var(--spacing-md) 0 var(--spacing-sm);
+  color: var(--text-primary);
+  margin: 20px 0 12px;
 }
 
 .stepContent p {
-  margin-bottom: var(--spacing-md);
-  color: #5a6c7d;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+  font-size: 15px;
 }
 
 .stepContent ul {
-  margin: var(--spacing-md) 0;
-  padding-left: var(--spacing-lg);
+  margin: 16px 0;
+  padding-left: 24px;
 }
 
 .stepContent li {
-  margin: var(--spacing-xs) 0;
-  color: #5a6c7d;
+  margin: 8px 0;
+  color: var(--text-secondary);
+  font-size: 15px;
 }
 
 .stepContent strong {
-  color: #2c3e50;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 .stepContent code {
-  background: #f6f8fb;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: var(--font-code);
+  background: var(--bg-tertiary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.9em;
-  color: #d73a49;
+  color: #DC382D;
 }
 
 .diagram,
 .compressDemo,
 .compressStrategy {
-  background: #1e1e1e;
-  padding: var(--spacing-md);
-  border-radius: 8px;
-  margin: var(--spacing-md) 0;
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
   overflow-x: auto;
 }
 
 .diagram pre,
 .compressDemo pre,
 .compressStrategy pre {
-  color: #d4d4d4;
-  font-family: var(--font-code);
+  color: #e5e5e5;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   line-height: 1.6;
   margin: 0;
 }
 
 .codeBlock {
-  background: #1e1e1e;
-  color: #d4d4d4;
-  padding: var(--spacing-md);
-  border-radius: 8px;
-  font-family: var(--font-code);
+  background: #1a1a1a;
+  color: #e5e5e5;
+  padding: 20px;
+  border-radius: 12px;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   line-height: 1.6;
   overflow-x: auto;
-  margin: var(--spacing-md) 0;
+  margin: 20px 0;
 }
 
 .advantage {
-  background: #f6ffed;
-  border-left: 4px solid #52c41a;
-  padding: var(--spacing-md);
-  border-radius: 4px;
-  margin: var(--spacing-md) 0;
+  background: var(--success-bg);
+  border-left: 4px solid var(--success-color);
+  padding: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
 }
 
 .advantage p {
   font-weight: 600;
-  color: #52c41a;
-  margin-bottom: var(--spacing-sm);
+  color: var(--success-color);
+  margin-bottom: 8px;
 }
 
-.configTable table,
+.configTable,
 .performanceTable {
   width: 100%;
   border-collapse: collapse;
-  margin: var(--spacing-md) 0;
+  margin: 20px 0;
 }
 
 .configTable th,
 .configTable td,
 .performanceTable th,
 .performanceTable td {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 12px 16px;
   text-align: left;
-  border: 1px solid #e8ecf1;
+  border: 1px solid var(--border-color);
 }
 
 .configTable th,
 .performanceTable th {
-  background: #667eea;
+  background: #DC382D;
   color: white;
   font-weight: 600;
 }
 
 .configTable tr:nth-child(even),
 .performanceTable tr:nth-child(even) {
-  background: #f8f9fa;
+  background: var(--bg-secondary);
 }
 
 .operationSteps {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
-  margin: var(--spacing-md) 0;
+  gap: 16px;
+  margin: 20px 0;
 }
 
 .step {
-  background: #f8f9fa;
-  padding: var(--spacing-md);
-  border-radius: 8px;
-  border-left: 4px solid #667eea;
+  background: var(--bg-secondary);
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #DC382D;
 }
 
 .step strong {
   display: block;
-  color: #667eea;
-  margin-bottom: var(--spacing-xs);
+  color: #DC382D;
+  margin-bottom: 8px;
+  font-size: 14px;
 }
 
 .step p {
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 8px;
+  color: var(--text-secondary);
 }
 
 .step pre {
-  background: #1e1e1e;
-  color: #d4d4d4;
-  padding: var(--spacing-sm);
-  border-radius: 4px;
-  font-family: var(--font-code);
+  background: #1a1a1a;
+  color: #e5e5e5;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   overflow-x: auto;
 }
 
 .commandSection {
-  margin: var(--spacing-lg) 0;
+  margin: 24px 0;
 }
 
 .commandSection h5 {
   font-size: 16px;
   font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+  margin-bottom: 12px;
 }
 
 .keyPoints {
-  background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
-  padding: var(--spacing-lg);
-  border-radius: 12px;
-  margin-bottom: var(--spacing-lg);
+  background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #FCA5A5;
 }
 
 .keyPoints h4 {
   font-size: 18px;
   font-weight: 600;
-  color: #d46b08;
-  margin-bottom: var(--spacing-md);
+  color: #DC382D;
+  margin-bottom: 16px;
 }
 
 .keyPoints ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .keyPoints li {
-  padding: var(--spacing-xs) 0;
-  color: #874d00;
+  padding: 8px 0;
+  color: #991b1b;
   position: relative;
-  padding-left: 24px;
+  padding-left: 28px;
+  font-size: 15px;
 }
 
 .keyPoints li::before {
   content: '✓';
   position: absolute;
   left: 0;
-  color: #fa8c16;
+  color: #DC382D;
   font-weight: bold;
+}
+
+.videoSection {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+}
+
+.videoTitle {
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .navigation {
   display: flex;
   justify-content: space-between;
-  gap: var(--spacing-md);
+  gap: 16px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border-color);
 }
 
 .prevButton,
 .nextButton,
 .finishButton {
-  padding: 12px 32px;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
@@ -344,23 +383,23 @@
 
 .prevButton {
   background: white;
-  color: #5a6c7d;
-  border: 2px solid #e8ecf1;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
 }
 
 .prevButton:hover:not(:disabled) {
-  border-color: #667eea;
-  color: #667eea;
+  border-color: #DC382D;
+  color: #DC382D;
 }
 
 .prevButton:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .nextButton,
 .finishButton {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #DC382D 0%, #B82E28 100%);
   color: white;
   border: none;
 }
@@ -368,33 +407,35 @@
 .nextButton:hover,
 .finishButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(220, 56, 45, 0.4);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .tutorialPage {
     flex-direction: column;
   }
-  
+
   .sidebar {
     width: 100%;
     height: auto;
     position: static;
     border-right: none;
-    border-bottom: 1px solid #e8ecf1;
+    border-bottom: 1px solid var(--border-color);
+    max-height: 200px;
   }
-  
+
   .content {
-    padding: var(--spacing-md);
+    padding: 20px;
   }
-  
+
   .navigation {
     flex-direction: column;
   }
-  
+
   .prevButton,
   .nextButton,
   .finishButton {
     width: 100%;
+    text-align: center;
   }
 }

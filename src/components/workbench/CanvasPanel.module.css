@@ -27,56 +27,116 @@
 .focusedNode {
   stroke: #0f766e;
   stroke-width: 3;
-  filter: drop-shadow(0 0 6px rgba(15, 118, 110, 0.35));
+  filter: drop-shadow(0 0 8px rgba(15, 118, 110, 0.4));
 }
 
 .compressedNode {
-  fill: #f3f4f6;
-  stroke: #9ca3af;
+  fill: #f1f5f9;
+  stroke: #94a3b8;
 }
 
 .nodeTitle {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   text-anchor: middle;
-  fill: #111827;
+  fill: #1e293b;
 }
 
 .nodeMeta {
   font-size: 11px;
   text-anchor: middle;
-  fill: #6b7280;
+  fill: #64748b;
+}
+
+/* ZipList 标签 */
+.ziplistBadge {
+  fill: #e0f2fe;
+  stroke: #0ea5e9;
+  stroke-width: 1;
+}
+
+.ziplistBadgeText {
+  font-size: 10px;
+  font-weight: 700;
+  fill: #0369a1;
+}
+
+/* 压缩标记 */
+.compressedBadge {
+  fill: #fef3c7;
+  stroke: #f59e0b;
+  stroke-width: 1;
+}
+
+.compressedBadgeText {
+  font-size: 9px;
+  font-weight: 800;
+  fill: #b45309;
+}
+
+/* 节点指针标签 */
+.pointerBadge {
+  fill: #dbeafe;
+  stroke: #3b82f6;
+  stroke-width: 1.5;
+}
+
+.pointerBadgeText {
+  font-size: 10px;
+  font-weight: 800;
+  fill: #1d4ed8;
+}
+
+/* 当前步骤提示 */
+.currentStepBadge {
+  fill: #1e293b;
+  stroke: #475569;
+  stroke-width: 1;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.currentStepText {
+  font-size: 14px;
+  font-weight: 700;
+  fill: #ffffff;
 }
 
 .entryBox {
-  fill: #fef3c7;
-  stroke: #f59e0b;
-  stroke-width: 1.3;
+  fill: #fef9c3;
+  stroke: #facc15;
+  stroke-width: 1.5;
 }
 
 .focusedEntry {
-  fill: #bbf7d0;
-  stroke: #16a34a;
+  fill: #dcfce7;
+  stroke: #22c55e;
   stroke-width: 2;
 }
 
-.entryText {
-  font-size: 11px;
-  fill: #6b7280;
-  text-anchor: middle;
+.entryIndex {
+  font-size: 10px;
+  fill: #a16207;
+  font-weight: 600;
+  text-anchor: start;
 }
 
 .entryValue {
   font-size: 12px;
-  fill: #111827;
-  font-weight: 700;
-  text-anchor: middle;
+  fill: #1e293b;
+  font-weight: 600;
+  text-anchor: start;
 }
 
 .entrySize {
   font-size: 10px;
-  fill: #6b7280;
-  text-anchor: middle;
+  fill: #64748b;
+  text-anchor: end;
+}
+
+.emptyNode {
+  font-size: 12px;
+  fill: #94a3b8;
+  font-style: italic;
 }
 
 .linkArrow {
@@ -84,20 +144,73 @@
   stroke-width: 1.6;
 }
 
-.flowArrow {
-  stroke: #0f766e;
+.nextArrow {
+  stroke: #3b82f6;
+  stroke-width: 2.5;
+}
+
+.prevArrow {
+  stroke: #f472b6;
   stroke-width: 2;
 }
 
-.flowLabel {
+.arrowLabelBadge {
+  fill: #3b82f6;
+  stroke: none;
+}
+
+.arrowLabelBadgePrev {
+  fill: #f472b6;
+  stroke: none;
+}
+
+.arrowLabelText {
+  font-size: 9px;
+  font-weight: 800;
+  fill: #ffffff;
+}
+
+.arrowLabelTextPrev {
+  font-size: 9px;
+  font-weight: 800;
+  fill: #ffffff;
+}
+
+.flowArrow {
+  stroke: #0f766e;
+  stroke-width: 2.5;
+}
+
+.flowArrowWarn {
+  stroke: #dc2626;
+  stroke-width: 3;
+}
+
+.flowArrowSuccess {
+  stroke: #16a34a;
+  stroke-width: 2.5;
+}
+
+.flowLabelBg {
   fill: #0f766e;
+}
+
+.flowLabelBgWarn {
+  fill: #dc2626;
+}
+
+.flowLabelBgSuccess {
+  fill: #16a34a;
+}
+
+.flowLabelText {
   font-size: 11px;
-  text-anchor: middle;
-  font-weight: 700;
+  font-weight: 800;
+  fill: #ffffff;
 }
 
 .nullNode {
-  fill: #f3f4f6;
+  fill: #f1f5f9;
   stroke: #94a3b8;
   stroke-dasharray: 4 3;
 }
@@ -116,24 +229,41 @@
   fill: #0369a1;
 }
 
-.annotationInfo,
-.annotationSuccess,
-.annotationWarn {
-  font-size: 12px;
+/* 注释样式 */
+.annotationBg {
+  fill: #e0f2fe;
+  stroke: #0ea5e9;
+  stroke-width: 1;
+}
+
+.annotationBgWarn {
+  fill: #fef2f2;
+  stroke: #ef4444;
+  stroke-width: 1.5;
+}
+
+.annotationBgSuccess {
+  fill: #f0fdf4;
+  stroke: #22c55e;
+  stroke-width: 1.5;
+}
+
+.annotationText {
+  font-size: 11px;
   font-weight: 700;
-  text-anchor: middle;
+  fill: #0369a1;
 }
 
-.annotationInfo {
-  fill: #0f766e;
+.annotationTextWarn {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #dc2626;
 }
 
-.annotationSuccess {
-  fill: #15803d;
-}
-
-.annotationWarn {
-  fill: #b45309;
+.annotationTextSuccess {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #16a34a;
 }
 
 .overlayLeft,

@@ -222,3 +222,147 @@
   font-weight: bold;
   margin-right: var(--spacing-xs);
 }
+
+/* MemoryView 新样式 */
+.memoryDiagram {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+
+.memoryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.memoryRow:last-child {
+  border-bottom: none;
+}
+
+.memoryLabel {
+  font-weight: 700;
+  color: #0369a1;
+  background: #e0f2fe;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.memoryValue {
+  color: #64748b;
+}
+
+.memoryNote {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* 对比表格 */
+.compareTable {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.compareRow {
+  display: grid;
+  grid-template-columns: 100px 1fr 140px;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.compareLabel {
+  color: #64748b;
+}
+
+.compareBar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.compareBar span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+}
+
+/* Entry 编码 */
+.encodingList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.encodingItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.encodingTag {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.encodingDesc {
+  color: #64748b;
+}
+
+/* 压缩说明 */
+.compressExplain {
+  background: #f0fdf4;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.compressExplain p {
+  margin: 0 0 8px 0;
+}
+
+.compressExplain ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.compressExplain li {
+  margin: 4px 0;
+}
+
+.compressExample {
+  margin-top: 10px;
+  padding: 8px;
+  background: #fefce8;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.compressExample span:first-child {
+  color: #64748b;
+}
+
+.compressExample span:last-child {
+  color: #16a34a;
+  font-weight: 600;
+}

@@ -1,7 +1,68 @@
 :root {
+  /* Redis 主题色 */
+  --redis-red: #DC382D;
+  --redis-red-light: #E8533F;
+  --redis-red-dark: #B82E28;
+
+  /* 主色调 */
+  --primary-color: #DC382D;
+  --primary-hover: #B82E28;
+  --primary-light: #FEE2E2;
+
+  /* 成功/警告/信息色 */
+  --success-color: #16a34a;
+  --success-bg: #dcfce7;
+  --warn-color: #d97706;
+  --warn-bg: #fef3c7;
+  --info-color: #0891b2;
+  --info-bg: #e0f2fe;
+
+  /* 背景色 */
+  --bg-color: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+
+  /* 文字色 */
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+
+  /* 边框色 */
+  --border-color: #e5e7eb;
+  --border-light: #f3f4f6;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* 间距 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* 字体大小 */
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* 过渡 */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+
   font-family: 'PingFang SC', 'Noto Sans SC', 'Segoe UI', sans-serif;
-  color: #111827;
-  background: #f8fafc;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -12,12 +73,19 @@
 }
 
 html,
-body,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 #root {
   margin: 0;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow: visible;
 }
 
 button,
