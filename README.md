@@ -1,7 +1,13 @@
-# Redis QuickList 可视化题解动画
+# Redis QuickList 可视化
 
-这是一个用于演示 Redis QuickList 关键机制（节点分裂、合并、压缩、队列弹出）的教学型可视化动画站点。
+Redis QuickList 数据结构教学演示，通过动画直观展示链表、节点分裂、合并、压缩等核心机制。
 
 ## 在线访问
 
-- GitHub Pages: https://fuck-redis.github.io/redis-quicklist-animation/
+https://fuck-redis.github.io/redis-quicklist-animation/
+
+## 技术栈
+
+- React + TypeScript + Vite
+- Remotion 动画
+- react-syntax-highlighter 语法高亮
