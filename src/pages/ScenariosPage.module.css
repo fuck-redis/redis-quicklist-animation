@@ -40,7 +40,7 @@
 .introCard {
   background: white;
   padding: var(--spacing-lg);
-  border-radius: 12px;
+  border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: all 0.3s;
 }
@@ -91,7 +91,7 @@
 .scenarioItem {
   background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
   border: 2px solid #e6f2ff;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: var(--spacing-lg);
   transition: all 0.3s;
 }

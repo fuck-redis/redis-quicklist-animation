@@ -164,7 +164,7 @@
 
 .knowledgeGroup {
   background: white;
-  border-radius: 12px;
+  border-radius: 6px;
   border: 1px solid var(--border-color);
   overflow: hidden;
   transition: all 0.2s;
@@ -249,16 +249,15 @@
 }
 
 .diagramCode {
-  background: #262626;
-  border-radius: 12px;
-  padding: 24px;
+  background: #1a1a1a;
+  border-radius: 6px;
+  padding: 20px;
   color: #e5e5e5;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
   line-height: 1.6;
-  margin: 0;
-  white-space: pre;
-  border: 1px solid #404040;
+  margin: 20px 0;
+  overflow-x: auto;
 }
 
 /* Learning Path */
@@ -280,7 +279,7 @@
   flex: 1;
   min-width: 200px;
   background: white;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 24px;
   border: 1px solid var(--border-color);
   display: flex;

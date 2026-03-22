@@ -134,7 +134,7 @@ export const PerformanceTable: React.FC = () => {
         style={{
           position: 'absolute',
           top: 100,
-          left: 40,
+          left: 260,
           background: '#10b981',
           padding: '8px 16px',
           borderRadius: 20,
@@ -151,7 +151,7 @@ export const PerformanceTable: React.FC = () => {
         style={{
           position: 'absolute',
           top: 100,
-          right: 40,
+          left: 380,
           background: '#f59e0b',
           padding: '8px 16px',
           borderRadius: 20,

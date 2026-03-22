@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './FAQPage.module.css';
+import { CodeBlock } from '@/components/common/CodeBlock';
 
 interface FAQ {
   id: number;
@@ -101,9 +102,9 @@ const faqs: FAQ[] = [
           <li><strong>CPU敏感</strong>：压缩/解压增加CPU开销</li>
         </ul>
         <h4>推荐配置：</h4>
-        <pre className={styles.code}>{`list-compress-depth 1    # 头尾各1个不压缩
+        <CodeBlock language="bash" code={`list-compress-depth 1    # 头尾各1个不压缩
 # 或
-list-compress-depth 2    # 头尾各2个不压缩`}</pre>
+list-compress-depth 2    # 头尾各2个不压缩`} />
       </>
     )
   },
@@ -152,7 +153,7 @@ list-compress-depth 2    # 头尾各2个不压缩`}</pre>
         <ol>
           <li>
             <strong>启用压缩</strong>
-            <pre className={styles.code}>{`list-compress-depth 1    # 可节省 30-70% 内存`}</pre>
+            <CodeBlock language="bash" code={`list-compress-depth 1    # 可节省 30-70% 内存`} />
           </li>
           <li>
             <strong>调整 fill 参数</strong>
@@ -170,7 +171,7 @@ list-compress-depth 2    # 头尾各2个不压缩`}</pre>
           </li>
           <li>
             <strong>监控内存</strong>
-            <pre className={styles.code}>{`MEMORY USAGE mylist    # 查看实际内存占用`}</pre>
+            <CodeBlock language="bash" code={`MEMORY USAGE mylist    # 查看实际内存占用`} />
           </li>
         </ol>
       </>
@@ -184,11 +185,11 @@ list-compress-depth 2    # 头尾各2个不压缩`}</pre>
       <>
         <p>消息队列是 QuickList 的典型应用场景，推荐配置：</p>
         <h4>配置建议：</h4>
-        <pre className={styles.code}>{`# Redis配置文件
+        <CodeBlock language="bash" code={`# Redis配置文件
 list-max-ziplist-size -2      # 8KB节点（默认）
-list-compress-depth 0         # 不压缩，保证性能`}</pre>
+list-compress-depth 0         # 不压缩，保证性能`} />
         <h4>使用模式：</h4>
-        <pre className={styles.code}>{`# 生产者：尾部入队
+        <CodeBlock language="redis" code={`# 生产者：尾部入队
 RPUSH message_queue "task1"
 RPUSH message_queue "task2"
 
@@ -197,7 +198,7 @@ BLPOP message_queue 0         # 阻塞等待
 
 # 或者批量消费
 LPOP message_queue
-LPOP message_queue`}</pre>
+LPOP message_queue`} />
         <h4>性能特点：</h4>
         <ul>
           <li>RPUSH 和 LPOP 都是 O(1)，性能优秀</li>
@@ -215,17 +216,17 @@ LPOP message_queue`}</pre>
       <>
         <p>时间线数据（如用户动态、操作历史）适合用 QuickList存储：</p>
         <h4>配置建议：</h4>
-        <pre className={styles.code}>{`list-max-ziplist-size -1      # 4KB节点（小一点）
-list-compress-depth 2         # 头尾各2个不压缩`}</pre>
+        <CodeBlock language="bash" code={`list-max-ziplist-size -1      # 4KB节点（小一点）
+list-compress-depth 2         # 头尾各2个不压缩`} />
         <h4>使用模式：</h4>
-        <pre className={styles.code}>{`# 新动态插入到头部
+        <CodeBlock language="redis" code={`# 新动态插入到头部
 LPUSH user:1001:timeline "post_123"
 
 # 获取最近N条
 LRANGE user:1001:timeline 0 19    # 最近20条
 
 # 定期清理旧数据
-LTRIM user:1001:timeline 0 999    # 只保留最近1000条`}</pre>
+LTRIM user:1001:timeline 0 999    # 只保留最近1000条`} />
         <h4>优化要点：</h4>
         <ul>
           <li>新数据在头部，旧数据在尾部</li>
@@ -264,9 +265,9 @@ LTRIM user:1001:timeline 0 999    # 只保留最近1000条`}</pre>
           <li><strong>解决</strong>：定期 LTRIM 或设置过期时间</li>
         </ul>
         <h4>排查命令：</h4>
-        <pre className={styles.code}>{`MEMORY USAGE mylist           # 查看内存占用
+        <CodeBlock language="redis" code={`MEMORY USAGE mylist           # 查看内存占用
 LLEN mylist                   # 查看元素数量
-DEBUG OBJECT mylist           # 查看内部编码`}</pre>
+DEBUG OBJECT mylist           # 查看内部编码`} />
       </>
     )
   },
@@ -288,20 +289,20 @@ DEBUG OBJECT mylist           # 查看内部编码`}</pre>
         <ul>
           <li>
             <strong>方案1：改用头尾操作</strong>
-            <pre className={styles.code}>{`# 不要用
+            <CodeBlock language="redis" code={`# 不要用
 LINDEX mylist 0
 
 # 改用
-LPOP mylist          # 或 LINDEX mylist -1`}</pre>
+LPOP mylist          # 或 LINDEX mylist -1`} />
           </li>
           <li>
             <strong>方案2：使用 LRANGE</strong>
-            <pre className={styles.code}>{`# 批量获取，比多次 LINDEX 快
-LRANGE mylist 0 99`}</pre>
+            <CodeBlock language="redis" code={`# 批量获取，比多次 LINDEX 快
+LRANGE mylist 0 99`} />
           </li>
           <li>
             <strong>方案3：换数据结构</strong>
-            <p>如果需要频繁随机访问，考虑用 Hash 或 Sorted Set</p>
+            <span>如果需要频繁随机访问，考虑用 Hash 或 Sorted Set</span>
           </li>
         </ul>
       </>

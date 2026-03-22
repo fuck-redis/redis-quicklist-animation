@@ -51,7 +51,7 @@ export const QuickListOverview: React.FC = () => {
       {/* Nodes */}
       {nodes.map((_, index) => {
         const x = getNodeX(index);
-        const y = 280;
+        const y = 180;
         const entryCount = 3 + index;
         const nodeScale = interpolate(frame, [index * 15, index * 15 + 10], [0.5, 1], { extrapolateRight: 'clamp' });
         const nodeOpacity = interpolate(frame, [index * 15, index * 15 + 10], [0, 1], { extrapolateRight: 'clamp' });
@@ -64,7 +64,7 @@ export const QuickListOverview: React.FC = () => {
               left: x,
               top: y,
               width: 160,
-              height: 200,
+              height: 280,
               transform: `scale(${nodeScale})`,
               opacity: nodeOpacity,
               transformOrigin: 'center center',
@@ -146,7 +146,7 @@ export const QuickListOverview: React.FC = () => {
       {nodes.slice(0, -1).map((_, index) => {
         const x1 = getNodeX(index) + 160;
         const x2 = getNodeX(index + 1);
-        const y = 380;
+        const y = 360;
         const arrowOpacity = interpolate(frame, [(index + 1) * 15, (index + 1) * 15 + 10], [0, 1], { extrapolateRight: 'clamp' });
 
         return (
@@ -183,7 +183,7 @@ export const QuickListOverview: React.FC = () => {
         style={{
           position: 'absolute',
           left: getNodeX(0) + 60,
-          top: 500,
+          top: 520,
           color: '#3b82f6',
           fontSize: 14,
           fontWeight: 'bold',
@@ -195,7 +195,7 @@ export const QuickListOverview: React.FC = () => {
         style={{
           position: 'absolute',
           left: getNodeX(nodeCount - 1) + 60,
-          top: 500,
+          top: 520,
           color: '#f472b6',
           fontSize: 14,
           fontWeight: 'bold',
@@ -208,7 +208,7 @@ export const QuickListOverview: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          bottom: 30,
+          bottom: 50,
           left: 0,
           right: 0,
           textAlign: 'center',

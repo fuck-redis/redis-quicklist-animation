@@ -9,7 +9,7 @@
 
 .modal {
   width: min(720px, 90vw);
-  border-radius: 14px;
+  border-radius: 6px;
   border: 1px solid #d1d5db;
   background: #ffffff;
   box-shadow: 0 20px 36px rgba(15, 23, 42, 0.22);

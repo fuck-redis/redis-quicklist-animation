@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './TutorialPage.module.css';
 import { MultiAnimationShowcase } from '@/components/RemotionAnimation/MultiAnimationShowcase';
+import { CodeBlock } from '@/components/common/CodeBlock';
 import './VideoStyles.css';
 
 export type AnimationType =
@@ -100,7 +101,7 @@ const tutorialSteps: TutorialStep[] = [
         </ul>
 
         <h4>实际案例：存储用户浏览历史</h4>
-        <pre className={styles.codeBlock}>{`# 存储用户最近浏览的100个商品
+        <CodeBlock language="redis" code={`# 存储用户最近浏览的100个商品
 redis> LPUSH user:view:123 "product:999"
 redis> LPUSH user:view:123 "product:888"
 redis> LTRIM user:view:123 0 99  # 只保留最近100条
@@ -110,7 +111,7 @@ redis> LRANGE user:view:123 0 9
 
 # 查看列表编码（验证是 QuickList）
 redis> OBJECT ENCODING user:view:123
-"quicklist"`}</pre>
+"quicklist"`} />
 
         <h4>内存效率对比</h4>
         <table className={styles.performanceTable}>
@@ -188,7 +189,7 @@ redis> OBJECT ENCODING user:view:123
         </ul>
 
         <h4>实际内存计算示例</h4>
-        <pre className={styles.codeBlock}>{`# 场景：存储100万个整数 "1"
+        <CodeBlock language="bash" code={`# 场景：存储100万个整数 "1"
 
 # 纯双向链表：
 # - 每个节点：16B (prev/next) + 8B (数据指针) + 8B (元数据) = 32B
@@ -204,7 +205,7 @@ redis> OBJECT ENCODING user:view:123
 # - 节点指针：16B × 500 = 8KB
 # - ZipList 头部：16B × 500 = 8KB
 # - Entry 数据：约 3MB × 500 / 2000 ≈ 3MB
-# - 总计：约 7-8MB`}</pre>
+# - 总计：约 7-8MB`} />
 
         <h4>QuickList 的优势</h4>
         <div className={styles.advantage}>
@@ -265,8 +266,7 @@ redis> OBJECT ENCODING user:view:123
         </div>
 
         <h4>每个 Entry 的详细结构</h4>
-        <pre className={styles.codeBlock}>{`
-┌─────────────────────────────────────────────────────────────┐
+        <CodeBlock language="text" code={`┌─────────────────────────────────────────────────────────────┐
 │                        Entry 结构                           │
 ├──────────────┬──────────────────────────────────────────────┤
 │   prevlen    │              content                         │
@@ -274,7 +274,7 @@ redis> OBJECT ENCODING user:view:123
 │              │  │ encoding │          data             │   │
 │ 前一个entry  │  │ 1-5字节  │        可变长度          │   │
 │ 的长度       │  │ 类型+长度 │        实际数据          │   │
-└──────────────┴──┴──────────┴─────────────────────────┴───┘`}</pre>
+└──────────────┴──┴──────────┴─────────────────────────┴───┘`} />
 
         <h4>prevlen 字段：级联更新的根源</h4>
         <p>prevlen 存储<strong>前一个 entry 的字节长度</strong>：</p>
@@ -332,7 +332,7 @@ redis> OBJECT ENCODING user:view:123
         </table>
 
         <h4>实战：查看 ZipList 内部结构</h4>
-        <pre className={styles.codeBlock}>{`# 创建一个 ZipList（Redis 自动选择 ZipList 或 QuickList）
+        <CodeBlock language="redis" code={`# 创建一个 ZipList（Redis 自动选择 ZipList 或 QuickList）
 redis> RPUSH mylist 1 2 3 4 5
 
 # 查看底层编码
@@ -344,10 +344,10 @@ redis> DEBUG OBJECT ENCODING mylist
 # Output: at 0x7f9c5c000b20连锁表节点数: 1, ziplist 个数: 1
 
 # 使用 DEBUG ZIPLIST 命令查看 ZipList 详情（需要 Redis 源码调试）
-# 或者通过 Redis Insight 等工具可视化查看`}</pre>
+# 或者通过 Redis Insight 等工具可视化查看`} />
 
         <h4>内存占用计算示例</h4>
-        <pre className={styles.codeBlock}>{`# 场景：存储 5 个整数 [1, 2, 3, 4, 5]
+        <CodeBlock language="bash" code={`# 场景：存储 5 个整数 [1, 2, 3, 4, 5]
 
 # ZipList 头部：
 # - zlbytes: 4 字节
@@ -365,7 +365,7 @@ redis> DEBUG OBJECT ENCODING mylist
 # 5 个 entry 总计：约 15 字节
 
 # 理论总大小：11 + 15 = 26 字节
-# 实际可能略有差异（内存对齐等）`}</pre>
+# 实际可能略有差异（内存对齐等）`} />
 
         <h4>为什么 ZipList 这么快？</h4>
         <ul>
@@ -473,7 +473,7 @@ redis> DEBUG OBJECT ENCODING mylist
         </div>
 
         <h4>fill 参数对内存和性能的影响</h4>
-        <pre className={styles.codeBlock}>{`# 场景：存储 100 万个小字符串（每个约 50 字节）
+        <CodeBlock language="bash" code={`# 场景：存储 100 万个小字符串（每个约 50 字节）
 
 # fill = -1 (4KB 节点)
 # 每个节点约 4000/50 = 80 个元素
@@ -492,7 +492,7 @@ redis> DEBUG OBJECT ENCODING mylist
 # ZipList 头部：782 × 16B = 12.5KB
 # Entry 数据：1000000 × 52B = 52MB
 # 总计：约 52MB
-# 节省内存：~1MB（节点指针和头部开销减少）`}</pre>
+# 节省内存：~1MB（节点指针和头部开销减少）`} />
 
         <h4>list-compress-depth (compress) 参数详解</h4>
         <p>compress 参数控制从列表<strong>两端</strong>开始，有多少个节点不压缩。中间节点都会被 LZF 算法压缩。</p>
@@ -569,7 +569,7 @@ compress = 3: 头尾各 3 个不压缩（适合超长列表）
         </table>
 
         <h4>Redis 配置示例</h4>
-        <pre className={styles.codeBlock}>{`# Redis 配置文件 redis.conf
+        <CodeBlock language="bash" code={`# Redis 配置文件 redis.conf
 
 # 方式 1：使用字节大小（推荐）
 list-max-ziplist-size -2    # 每个节点最大 8KB（默认）
@@ -589,10 +589,10 @@ list-compress-depth 0        # 不压缩，CPU 开销最小
 
 # 消息队列场景（需要最低延迟）
 list-max-ziplist-size -2    # 默认 8KB
-list-compress-depth 0        # 不压缩，所有节点快速访问`}</pre>
+list-compress-depth 0        # 不压缩，所有节点快速访问`} />
 
         <h4>在线调整参数</h4>
-        <pre className={styles.codeBlock}>{`# 使用 CONFIG SET 在线调整（不需要重启）
+        <CodeBlock language="bash" code={`# 使用 CONFIG SET 在线调整（不需要重启）
 CONFIG SET list-max-ziplist-size -4
 CONFIG SET list-compress-depth 1
 
@@ -601,7 +601,7 @@ CONFIG GET list-max-ziplist-size
 CONFIG GET list-compress-depth
 
 # 注意：在线修改只对新创建的 QuickList 生效
-# 已有列表需要重新创建才能应用新参数`}</pre>
+# 已有列表需要重新创建才能应用新参数`} />
 
         <h4>配置选择决策树</h4>
         <div className={styles.diagram}>
@@ -660,7 +660,7 @@ CONFIG GET list-compress-depth
 
         <h4>分裂位置选择策略</h4>
         <p>Redis 选择分裂点的策略是<strong>尽量保持两个节点平衡</strong>：</p>
-        <pre className={styles.codeBlock}>{`
+        <CodeBlock language="text" code={`
 分裂位置计算：
 - 如果 fill=-2 (8KB)，每个节点目标约 4000 字节
 - 分裂点 = ceil(current_size / 2)
@@ -668,63 +668,60 @@ CONFIG GET list-compress-depth
 
 例如：节点有 20 个元素需要分裂
 - 分裂后：Node1 10个元素，Node2 10个元素
-- 如果 fill=10，则 Node1 刚好达到限制，Node2 稍小`}</pre>
+- 如果 fill=10，则 Node1 刚好达到限制，Node2 稍小`} />
 
         <h4>分裂过程详解</h4>
         <div className={styles.operationSteps}>
           <div className={styles.step}>
             <strong>Step 1：检测限制</strong>
             <p>LPUSH "new_element" 到已有 10 个元素的节点（fill=10）</p>
-            <pre>{`当前节点: [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10]
-节点大小: 4200 字节（超过 fill=-2 的 8KB 限制中的元素数量限制）`}</pre>
+            <CodeBlock language="text" code={`当前节点: [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10]
+节点大小: 4200 字节（超过 fill=-2 的 8KB 限制中的元素数量限制）`} />
           </div>
 
           <div className={styles.step}>
             <strong>Step 2：计算分裂点</strong>
             <p>计算中间位置，确定哪些元素留在原节点</p>
-            <pre>{`分裂点计算: ceil(11/2) = 6
+            <CodeBlock language="text" code={`分裂点计算: ceil(11/2) = 6
 原节点保留: 前 6 个元素 [e1, e2, e3, e4, e5, e6]
-新节点包含: 后 5 个元素 + 新插入元素 [e7, e8, e9, e10, new]`}</pre>
+新节点包含: 后 5 个元素 + 新插入元素 [e7, e8, e9, e10, new]`} />
           </div>
 
           <div className={styles.step}>
             <strong>Step 3：分配新节点</strong>
             <p>创建新的 ZipList 节点</p>
-            <pre>{`
-分配新节点内存：
+            <CodeBlock language="text" code={`分配新节点内存：
 - 节点结构: 16 字节
 - ZipList 头部: 16 字节
-- 初始容量: 根据 fill 配置`}</pre>
+- 初始容量: 根据 fill 配置`} />
           </div>
 
           <div className={styles.step}>
             <strong>Step 4：数据迁移</strong>
             <p>将后半部分元素移动到新节点</p>
-            <pre>{`
-数据迁移过程：
+            <CodeBlock language="text" code={`数据迁移过程：
 1. 扩展原节点 ZipList 尾部空间
 2. 将 [e7,e8,e9,e10] 复制/移动到新节点
 3. 更新原节点的 zltail 偏移量
 
-注意：这是 O(N) 操作，元素越多代价越高`}</pre>
+注意：这是 O(N) 操作，元素越多代价越高`} />
           </div>
 
           <div className={styles.step}>
             <strong>Step 5：链表重连</strong>
             <p>更新双向链表指针</p>
-            <pre>{`
-重连指针：
+            <CodeBlock language="text" code={`重连指针：
 Node1.next = Node2
 Node2.prev = Node1
 
 同时更新：
 - 新增节点的 prev/next 指针
-- 如果是中间位置，还需要处理与前后节点的关系`}</pre>
+- 如果是中间位置，还需要处理与前后节点的关系`} />
           </div>
         </div>
 
         <h4>实际 Redis 命令模拟</h4>
-        <pre className={styles.codeBlock}>{`# 初始状态：一个节点存储所有元素
+        <CodeBlock language="redis" code={`# 初始状态：一个节点存储所有元素
 redis> RPUSH mylist 1 2 3 4 5 6 7 8 9 10
 (integer) 10
 
@@ -743,7 +740,7 @@ redis> DEBUG OBJECT ENCODING mylist
 # 查看节点信息
 redis> DEBUG OBJECT mylist
 # Output 示例:
-# quicklistNodes:2, num_elements:21`}</pre>
+# quicklistNodes:2, num_elements:21`} />
 
         <h4>fill 值对分裂频率的影响</h4>
         <table className={styles.performanceTable}>
@@ -826,7 +823,7 @@ redis> DEBUG OBJECT mylist
         </ul>
 
         <h4>合并的判断条件</h4>
-        <pre className={styles.codeBlock}>{`
+        <CodeBlock language="text" code={`
 合并条件（fill = 10 为例）：
 ┌─────────────────────────────────────────────────────┐
 │ 条件1: NodeA 的元素数 + NodeB 的元素数 <= fill     │
@@ -836,14 +833,14 @@ redis> DEBUG OBJECT mylist
 │ NodeA: [1,2,3] (3个元素)                          │
 │ NodeB: [4,5] (2个元素)                            │
 │ 总计: 5 <= 10 → 可以合并！                         │
-└─────────────────────────────────────────────────────┘`}</pre>
+└─────────────────────────────────────────────────────┘`} />
 
         <h4>合并过程详解</h4>
         <div className={styles.operationSteps}>
           <div className={styles.step}>
             <strong>Step 1：触发检查</strong>
             <p>LPOP 删除 NodeA 的尾部元素后，NodeA 元素变少</p>
-            <pre>{`操作前：
+            <CodeBlock language="text" code={`操作前：
 NodeA: [1, 2, 3, 4, 5]    # 5个元素
 NodeB: [6, 7]              # 2个元素
 NodeC: [...]
@@ -853,47 +850,47 @@ LPOP mylist  # 删除 5
 操作后：
 NodeA: [1, 2, 3, 4]        # 4个元素
 NodeB: [6, 7]              # 2个元素（不变）
-NodeC: [...]`}</pre>
+NodeC: [...]`} />
           </div>
 
           <div className={styles.step}>
             <strong>Step 2：检查合并条件</strong>
             <p>检查 NodeA + NodeB 的元素数是否 &lt;= fill</p>
-            <pre>{`NodeA 元素数: 4
+            <CodeBlock language="text" code={`NodeA 元素数: 4
 NodeB 元素数: 2
 总计: 6
 
 fill = 10
-6 <= 10 → 可以合并！`}</pre>
+6 <= 10 → 可以合并！`} />
           </div>
 
           <div className={styles.step}>
             <strong>Step 3：数据合并</strong>
             <p>将 NodeB 的元素追加到 NodeA</p>
-            <pre>{`合并前内存布局：
+            <CodeBlock language="text" code={`合并前内存布局：
 NodeA ZipList: [1, 2, 3, 4]
 NodeB ZipList: [6, 7]
 
 合并后：
 NodeA ZipList: [1, 2, 3, 4, 6, 7]
-NodeB ZipList: (待删除)`}</pre>
+NodeB ZipList: (待删除)`} />
           </div>
 
           <div className={styles.step}>
             <strong>Step 4：释放 NodeB</strong>
             <p>删除 NodeB 节点，更新指针</p>
-            <pre>{`重连指针：
+            <CodeBlock language="text" code={`重连指针：
 NodeA.next = NodeC
 NodeC.prev = NodeA
 
 释放内存：
 - NodeB 的 prev/next 指针
-- NodeB 的 ZipList 数据（realloc 或直接 free）`}</pre>
+- NodeB 的 ZipList 数据（realloc 或直接 free）`} />
           </div>
         </div>
 
         <h4>实际 Redis 命令模拟</h4>
-        <pre className={styles.codeBlock}>{`# 创建会产生多个节点的列表
+        <CodeBlock language="redis" code={`# 创建会产生多个节点的列表
 redis> RPUSH mylist 1 2 3 4 5 6 7 8 9 10
 (integer) 10
 
@@ -914,7 +911,7 @@ redis> LPOP mylist
 
 # 最终状态
 redis> LLEN mylist
-(integer) 18`}</pre>
+(integer) 18`} />
 
         <h4>合并的代价</h4>
         <ul>
@@ -964,7 +961,7 @@ redis> LLEN mylist
         </table>
 
         <h4>fill 值对合并的影响</h4>
-        <pre className={styles.codeBlock}>{`
+        <CodeBlock language="text" code={`
 fill 值对合并的影响：
 
 fill = -2 (8KB，约 2000 个小元素)：
@@ -980,7 +977,7 @@ fill = 1 (每个节点 1 个元素)：
 fill = 10 (10 个元素)：
 - 合并阈值：2 个相邻节点元素和 <= 10
 - 例如：4+5=9 <= 10 → 可以合并
-- 合并触发频率适中`}</pre>
+- 合并触发频率适中`} />
       </>
     ),
     keyPoints: [
@@ -1013,7 +1010,7 @@ fill = 10 (10 个元素)：
 
         <h4>LZF 压缩算法原理</h4>
         <p>Redis 使用 <strong>LZF 算法</strong>（Lempel-Ziv-Free）进行压缩，这是一种基于词典的无损压缩算法：</p>
-        <pre className={styles.codeBlock}>{`
+        <CodeBlock language="text" code={`
 LZF 压缩核心思想：
 ┌────────────────────────────────────────────────────────┐
 │ 1. 建立词典：记录已见过的子串和位置                      │
@@ -1029,7 +1026,7 @@ LZF 压缩核心思想：
 压缩输出: [ref hello] world, [ref hello] redis, [ref hello] quicklist
          ↓
 实际编码: \x84\x05hello world, \x84\x05redis, \x84\x05quicklist
-         (其中 \x84 是压缩标记，表示后面跟一个引用)`}</pre>
+         (其中 \x84 是压缩标记，表示后面跟一个引用)`} />
 
         <h4>压缩时机</h4>
         <p>节点压缩发生在以下时刻：</p>
@@ -1127,7 +1124,7 @@ compress = 2: 两端各 2 个节点不压缩
         </div>
 
         <h4>压缩对性能的影响</h4>
-        <pre className={styles.codeBlock}>{`
+        <CodeBlock language="text" code={`
 访问压缩节点的性能开销：
 
 1. 头尾节点访问（O(1)）：
@@ -1144,10 +1141,10 @@ compress = 2: 两端各 2 个节点不压缩
 
 3. 批量访问中间节点：
    - 每次访问都需要解压
-   - 如果频繁访问中间节点，压缩反而降低性能`}</pre>
+   - 如果频繁访问中间节点，压缩反而降低性能`} />
 
         <h4>实际配置建议</h4>
-        <pre className={styles.codeBlock}>{`# 场景 1：消息队列（低延迟优先）
+        <CodeBlock language="bash" code={`# 场景 1：消息队列（低延迟优先）
 list-max-ziplist-size -2    # 默认 8KB
 list-compress-depth 0         # 不压缩，保证最低延迟
 
@@ -1164,10 +1161,10 @@ list-compress-depth 2         # 两端各 2 个不压缩
 # 场景 4：超长列表（高效压缩）
 list-max-ziplist-size -5    # 64KB 最大节点
 list-compress-depth 3         # 两端各 3 个不压缩
-# 理由：节点少但大，压缩效果显著`}</pre>
+# 理由：节点少但大，压缩效果显著`} />
 
         <h4>压缩内存计算示例</h4>
-        <pre className={styles.codeBlock}>{`# 场景：100 万个短字符串，每个约 50 字节
+        <CodeBlock language="bash" code={`# 场景：100 万个短字符串，每个约 50 字节
 
 # 未压缩情况：
 # 原始数据：100万 × 50B = 50MB
@@ -1182,7 +1179,7 @@ list-compress-depth 3         # 两端各 3 个不压缩
 # ZipList 开销：约 2MB
 # 总计：约 25MB
 
-# 内存节省：55MB → 25MB，节省约 55%`}</pre>
+# 内存节省：55MB → 25MB，节省约 55%`} />
       </>
     ),
     keyPoints: [
@@ -1216,7 +1213,7 @@ list-compress-depth 3         # 两端各 3 个不压缩
 
         <h4>1. 头尾插入：LPUSH / RPUSH（O(1)）</h4>
         <p>这是 QuickList 最核心的操作，保持 O(1) 的高性能。</p>
-        <pre className={styles.codeBlock}>{`# LPUSH：从头部插入，新元素变成第一个
+        <CodeBlock language="redis" code={`# LPUSH：从头部插入，新元素变成第一个
 redis> LPUSH mylist "world"
 (integer) 1
 redis> LPUSH mylist "hello"
@@ -1231,7 +1228,7 @@ redis> LRANGE mylist 0 -1
 # 1. 定位到 HEAD 节点（Node0）
 # 2. 在 Node0 的 ZipList 头部插入新元素
 # 3. 如果 Node0 超过 fill 限制，触发分裂
-# 4. 更新链表头部指针`}</pre>
+# 4. 更新链表头部指针`} />
 
         <div className={styles.diagram}>
           <pre>{`
@@ -1256,7 +1253,7 @@ LPUSH 执行示意图：
 
         <h4>2. 头尾弹出：LPOP / RPOP（O(1)）</h4>
         <p>与插入对应，弹出操作也是 O(1) 高性能。</p>
-        <pre className={styles.codeBlock}>{`# LPOP：从头部弹出，返回第一个元素并删除
+        <CodeBlock language="redis" code={`# LPOP：从头部弹出，返回第一个元素并删除
 redis> LPOP mylist
 "hello"
 
@@ -1266,8 +1263,10 @@ redis> RPOP mylist
 
 # 内部执行过程：
 # 1. 定位到 HEAD/TAIL 节点
-# 2. 读取并删除 ZipList 头部/尾部元素
-# 3. 如果节点变空，删除节点并更新指针
+# 2. 读取并删除 ZipList 头部/尾部元素`} />
+
+        <div className={styles.diagram}>
+          <pre>{`# 3. 如果节点变空，删除节点并更新指针
 # 4. 如果相邻节点可以合并，执行合并
 
 # 弹出后节点为空的情况：
@@ -1278,10 +1277,11 @@ redis> RPOP mylist
 #      ▼ LPOP 3次
 # ┌─────────┐    (空) 删除
 # │ [a,b,c] │ ──────────► (节点被删除，N1 成为新的 HEAD)`}</pre>
+        </div>
 
         <h4>3. 按索引访问：LINDEX（O(N)）</h4>
         <p><strong>性能杀手</strong>：需要遍历多个节点才能定位元素。</p>
-        <pre className={styles.codeBlock}>{`# LINDEX：获取指定索引位置的元素
+        <CodeBlock language="redis" code={`# LINDEX：获取指定索引位置的元素
 redis> LINDEX mylist 0     # 获取第一个元素
 "hello"
 redis> LINDEX mylist -1    # 获取最后一个元素
@@ -1299,11 +1299,11 @@ redis> LINDEX mylist -1    # 获取最后一个元素
 # └─────────┘    └─────────┘    └─────────┘
 #       │              │              │
 #       ▼ LINDEX 150   ▼              ▼
-#   遍历 2 个节点才能找到！需要移动 100 个元素的指针`}</pre>
+#   遍历 2 个节点才能找到！需要移动 100 个元素的指针`} />
 
         <h4>4. 范围查询：LRANGE（O(N)）</h4>
         <p>遍历收集指定范围的元素，范围越大越慢。</p>
-        <pre className={styles.codeBlock}>{`# LRANGE：获取指定范围的元素
+        <CodeBlock language="redis" code={`# LRANGE：获取指定范围的元素
 redis> LRANGE mylist 0 9     # 获取前 10 个元素
 redis> LRANGE mylist -10 -1  # 获取最后 10 个元素
 
@@ -1314,11 +1314,11 @@ redis> LRANGE mylist -10 -1  # 获取最后 10 个元素
 
 # 💡 优化建议：尽量使用负索引访问尾部元素
 # 访问前 10 个元素需要从 HEAD 遍历
-# 访问后 10 个元素从 TAIL 倒序遍历更快（如果有双向指针）`}</pre>
+# 访问后 10 个元素从 TAIL 倒序遍历更快（如果有双向指针）`} />
 
         <h4>5. 插入元素：LINSERT（O(N)）</h4>
         <p>在 pivot 前后插入新元素，需要先找到 pivot 位置。</p>
-        <pre className={styles.codeBlock}>{`# LINSERT：在 pivot 前后插入新元素
+        <CodeBlock language="redis" code={`# LINSERT：在 pivot 前后插入新元素
 redis> LINSERT mylist BEFORE "pivot" "new_element"
 (integer) 5
 redis> LINSERT mylist AFTER "pivot" "after_pivot"
@@ -1335,7 +1335,7 @@ redis> LINSERT mylist AFTER "pivot" "after_pivot"
 # ⚠️ 注意：LINSERT 在中间插入时效率最低
 # - 需要遍历可能所有的节点
 # - 插入点可能在 ZipList 中间位置
-# - 大量元素需要移动`}</pre>
+# - 大量元素需要移动`} />
 
         <h4>完整操作复杂度表</h4>
         <table className={styles.performanceTable}>
@@ -1394,7 +1394,7 @@ redis> LINSERT mylist AFTER "pivot" "after_pivot"
         </table>
 
         <h4>实际使用建议</h4>
-        <pre className={styles.codeBlock}>{`# ✅ 正确示范：利用 O(1) 操作构建高性能队列
+        <CodeBlock language="redis" code={`# ✅ 正确示范：利用 O(1) 操作构建高性能队列
 # 生产者：RPUSH 入队
 redis> RPUSH queue:tasks "task_001"
 redis> RPUSH queue:tasks "task_002"
@@ -1413,7 +1413,7 @@ redis> LINDEX mylist 10000
 
 # ❌ 错误示范：在中间位置频繁 LINSERT
 # 每次都需要遍历查找位置
-redis> LINSERT mylist BEFORE "element_5000" "new"`}</pre>
+redis> LINSERT mylist BEFORE "element_5000" "new"`} />
       </>
     ),
     keyPoints: [
@@ -1441,7 +1441,7 @@ redis> LINSERT mylist BEFORE "element_5000" "new"`}</pre>
 
         <h4>1. LINSERT - 精确位置插入（O(N)）</h4>
         <p>LINSERT 允许在 pivot 元素的前后插入新元素，是 List 中最灵活但最昂贵的操作。</p>
-        <pre className={styles.codeBlock}>{`# LINSERT 语法
+        <CodeBlock language="redis" code={`# LINSERT 语法
 LINSERT key BEFORE|AFTER pivot element
 
 # 示例：在 "world" 前插入 "beautiful"
@@ -1458,7 +1458,7 @@ redis> LRANGE mylist 0 -1
 # 返回值：
 # - 新列表长度（插入成功）
 # - -1（pivot 不存在）
-# - 0（key 不存在）`}</pre>
+# - 0（key 不存在）`} />
 
         <div className={styles.diagram}>
           <pre>{`
@@ -1493,7 +1493,7 @@ LINSERT 执行过程：
 
         <h4>2. LREM - 精确删除元素（O(N)）</h4>
         <p>LREM 根据 count 参数决定从哪个方向删除多少个匹配元素。</p>
-        <pre className={styles.codeBlock}>{`# LREM 语法
+        <CodeBlock language="redis" code={`# LREM 语法
 LREM key count element
 
 # count 的三种语义：
@@ -1524,11 +1524,11 @@ redis> LREM mylist 0 "d"     # 删除所有 "d"
 
 redis> LRANGE mylist 0 -1
 1) "b"
-2) "c"`}</pre>
+2) "c"`} />
 
         <h4>3. LTRIM - 范围裁剪（O(N)）</h4>
         <p>LTRIM 是一个<strong>数据治理神器</strong>，用于保持 List 长度，防止无限增长。</p>
-        <pre className={styles.codeBlock}>{`# LTRIM 语法
+        <CodeBlock language="redis" code={`# LTRIM 语法
 LTRIM key start stop
 
 # 保留索引 start 到 stop 之间的元素，删除其余
@@ -1553,7 +1553,7 @@ redis> LRANGE mylist 0 -1
 # 常用模式：结合 LPUSH/RPUSH 实现固定大小队列
 # 每当添加新元素时，裁剪到固定长度
 redis> LPUSH mylist "new_item"
-redis> LTRIM mylist 0 999   # 只保留最新 1000 条`}</pre>
+redis> LTRIM mylist 0 999   # 只保留最新 1000 条`} />
 
         <div className={styles.advantage}>
           <p>💡 <strong>LTRIM 的特点</strong>：</p>
@@ -1566,7 +1566,7 @@ redis> LTRIM mylist 0 999   # 只保留最新 1000 条`}</pre>
 
         <h4>4. LSET - 索引更新（O(N)）</h4>
         <p>LSET 直接修改指定索引位置的元素值。</p>
-        <pre className={styles.codeBlock}>{`# LSET 语法
+        <CodeBlock language="redis" code={`# LSET 语法
 LSET key index element
 
 redis> RPUSH mylist "hello" "world"
@@ -1582,11 +1582,11 @@ redis> LRANGE mylist 0 -1
 
 # 错误情况：索引超出范围
 redis> LSET mylist 10 "invalid"
-(error) ERR index out of range`}</pre>
+(error) ERR index out of range`} />
 
         <h4>5. LLEN - 长度获取（O(1)）</h4>
         <p>LLEN 直接从 QuickList 头部读取 zllen 字段，是真正的 O(1) 操作。</p>
-        <pre className={styles.codeBlock}>{`# LLEN 语法
+        <CodeBlock language="redis" code={`# LLEN 语法
 LLEN key
 
 redis> RPUSH mylist 1 2 3 4 5
@@ -1598,10 +1598,10 @@ redis> LLEN mylist
 # 为什么不遍历？
 # QuickList 结构中直接存储了列表长度（zllen）
 # 每次 LPUSH/RPUSH 时更新，LPOP/RPOP 时也更新
-# 所以 LLEN 不需要遍历就能返回长度`}</pre>
+# 所以 LLEN 不需要遍历就能返回长度`} />
 
         <h4>高级使用模式</h4>
-        <pre className={styles.codeBlock}>{`# 模式 1：实现发布-订阅系统（简易版）
+        <CodeBlock language="lua" code={`# 模式 1：实现发布-订阅系统（简易版）
 # 发布者
 redis> LPUSH channel:news "Breaking news..."
 redis> LPUSH channel:news "More updates..."
@@ -1625,7 +1625,7 @@ redis.call('LTRIM', KEYS[1], 0, 99)
 redis> LPUSH post:123:comments "great post!"
 redis> LREM post:123:comments 0 "spam comment"  # 删除垃圾评论
 redis> LTRIM post:123:comments 0 99   # 只保留最新 100 条
-redis> LRANGE post:123:comments 0 19   # 分页获取（第 1 页）`}</pre>
+redis> LRANGE post:123:comments 0 19   # 分页获取（第 1 页）`} />
       </>
     ),
     keyPoints: [
@@ -1651,7 +1651,7 @@ redis> LRANGE post:123:comments 0 19   # 分页获取（第 1 页）`}</pre>
         <h4>QuickList 内存构成详解</h4>
         <p>理解 QuickList 的内存构成是优化的基础。每一部分都有其独特的开销和优化空间。</p>
 
-        <pre className={styles.codeBlock}>{`
+        <CodeBlock language="text" code={`
 QuickList 内存全景图：
 
 ┌─────────────────────────────────────────────────────────────┐
@@ -1684,10 +1684,10 @@ Total = QuickList(24B)
        + 指针(16B/节点 × 节点数)
 
 每个 Entry 的内存：
-Entry = prevlen(1-5B) + encoding(1-5B) + data(变长)`}</pre>
+Entry = prevlen(1-5B) + encoding(1-5B) + data(变长)`} />
 
         <h4>实际内存计算示例</h4>
-        <pre className={styles.codeBlock}>{`# 场景：存储 100 万个小字符串（每个约 50 字节）
+        <CodeBlock language="bash" code={`# 场景：存储 100 万个小字符串（每个约 50 字节）
 
 # 配置：fill=-2 (8KB)，compress=0
 
@@ -1705,11 +1705,11 @@ Entry = prevlen(1-5B) + encoding(1-5B) + data(变长)`}</pre>
 # Entry 数据：1000000 × 52B = 52MB
 # 总计：约 52.2MB
 
-# 对比：纯双向链表需要约 64MB（每个节点 64B）`}</pre>
+# 对比：纯双向链表需要约 64MB（每个节点 64B）`} />
 
         <h4>优化策略一：启用压缩</h4>
         <p>压缩可以显著减少中间节点的内存占用，特别是对于重复性高的数据。</p>
-        <pre className={styles.codeBlock}>{`# 启用压缩：两端各 1 个节点不压缩
+        <CodeBlock language="bash" code={`# 启用压缩：两端各 1 个节点不压缩
 list-compress-depth 1
 
 # 内存节省效果：
@@ -1719,7 +1719,7 @@ list-compress-depth 1
 # - 压缩后：46.8MB × 50% = 23.4MB
 # - 头尾节点（不压缩）：52MB × 10% = 5.2MB
 # - 总计：23.4 + 5.2 = 28.6MB
-# - 节省：52.2 - 28.6 = 23.6MB (约 45%)`}</pre>
+# - 节省：52.2 - 28.6 = 23.6MB (约 45%)`} />
 
         <h4>优化策略二：选择合适的 fill</h4>
         <p>fill 参数直接影响节点数量和分裂/合并频率。</p>
@@ -1766,7 +1766,7 @@ list-compress-depth 1
         </table>
 
         <h4>优化策略三：定期清理和数据归档</h4>
-        <pre className={styles.codeBlock}>{`# 定期清理防止无限增长
+        <CodeBlock language="lua" code={`# 定期清理防止无限增长
 # 每次 LPUSH 后执行 LTRIM
 redis> LPUSH mylist "new_item"
 redis> LTRIM mylist 0 9999   # 只保留 10000 条
@@ -1785,10 +1785,10 @@ return redis.call('LLEN', key)
 # 将冷数据迁移到另一个 List 或持久化存储
 redis> LRANGE mylist 0 999        # 读取前 1000 条
 redis> LRANGE mylist 1000 -1      # 剩余的归档
-redis> LTRIM mylist 0 999          # 删除已归档的数据`}</pre>
+redis> LTRIM mylist 0 999          # 删除已归档的数据`} />
 
         <h4>监控和分析工具</h4>
-        <pre className={styles.codeBlock}>{`# 查看单个 key 的内存占用
+        <CodeBlock language="redis" code={`# 查看单个 key 的内存占用
 redis> MEMORY USAGE mylist
 (integer) 52428800   # 50MB
 
@@ -1811,7 +1811,7 @@ redis> INFO memory
 
 # 使用 Redis CLI 分析大 List
 redis-cli --biglists
-# 扫描并报告大 List 的统计信息`}</pre>
+# 扫描并报告大 List 的统计信息`} />
 
         <h4>内存优化效果对比</h4>
         <table className={styles.performanceTable}>
@@ -1878,7 +1878,7 @@ redis-cli --biglists
 
         <h4>场景 1：消息队列（高性能优先）</h4>
         <p>消息队列是 QuickList 最经典的应用场景，需要最低的延迟和最高的吞吐量。</p>
-        <pre className={styles.codeBlock}>{`# 生产者：持续写入任务
+        <CodeBlock language="redis" code={`# 生产者：持续写入任务
 redis> RPUSH queue:tasks '{"id": 1, "type": "email", "to": "user@example.com"}'
 redis> RPUSH queue:tasks '{"id": 2, "type": "sms", "to": "13800138000"}'
 redis> RPUSH queue:tasks '{"id": 3, "type": "push", "to": "device_token"}'
@@ -1888,7 +1888,7 @@ redis> BLPOP queue:tasks 0   # 0 表示永久阻塞
 # 返回：'{"id": 1, "type": "email", "to": "user@example.com"}'
 
 # 消费者处理完成后确认（可选）
-redis> LPUSH queue:processed "task_1_done"`}</pre>
+redis> LPUSH queue:processed "task_1_done"`} />
 
         <div className={styles.diagram}>
           <pre>{`
@@ -1913,7 +1913,7 @@ redis> LPUSH queue:processed "task_1_done"`}</pre>
 
         <h4>场景 2：用户时间线/Feed（内存优化优先）</h4>
         <p>时间线场景特点是写入频繁（LPUSH），读取相对较少，适合启用压缩节省内存。</p>
-        <pre className={styles.codeBlock}>{`# 用户浏览记录时间线
+        <CodeBlock language="redis" code={`# 用户浏览记录时间线
 redis> LPUSH user:feed:12345 "2024-01-15:visited:/products/123"
 redis> LPUSH user:feed:12345 "2024-01-15:visited:/cart"
 redis> LPUSH user:feed:12345 "2024-01-15:searched:iphone"
@@ -1927,11 +1927,11 @@ redis> LTRIM user:feed:12345 0 699
 
 # 推荐 Redis 配置：
 # list-max-ziplist-size -4  (32KB 节点，存储更多小元素)
-# list-compress-depth 1     (两端各 1 个不压缩，访问头部快)`}</pre>
+# list-compress-depth 1     (两端各 1 个不压缩，访问头部快)`} />
 
         <h4>场景 3：最新评论列表（分页友好）</h4>
         <p>评论列表需要支持分页浏览，LRANGE 是主要读取方式。</p>
-        <pre className={styles.codeBlock}>{`# 发布新评论（插入到头部）
+        <CodeBlock language="redis" code={`# 发布新评论（插入到头部）
 redis> LPUSH post:5678:comments '{"user": "alice", "content": "写得真好！", "time": 1705312200}'
 redis> LPUSH post:5678:comments '{"user": "bob", "content": "学到了", "time": 1705312300}'
 redis> LPUSH post:5678:comments '{"user": "charlie", "content": "赞一个", "time": 1705312400}'
@@ -1950,11 +1950,11 @@ redis> LTRIM post:5678:comments 0 499
 
 # 推荐 Redis 配置：
 # list-max-ziplist-size -2  (8KB 节点，平衡性能)
-# list-compress-depth 2      (两端各 2 个不压缩，方便分页访问)`}</pre>
+# list-compress-depth 2      (两端各 2 个不压缩，方便分页访问)`} />
 
         <h4>场景 4：限流滑动窗口（精确控制）</h4>
         <p>滑动窗口限流需要精确的时间控制，通常使用时间戳作为元素。</p>
-        <pre className={styles.codeBlock}>{`# 记录用户请求时间戳
+        <CodeBlock language="redis" code={`# 记录用户请求时间戳
 redis> LPUSH rate:limit:user:8888 "1705312400000"  # 当前毫秒时间戳
 redis> LPUSH rate:limit:user:8888 "1705312399000"
 redis> LPUSH rate:limit:user:8888 "1705312398000"
@@ -1971,11 +1971,11 @@ redis> LRANGE rate:limit:user:8888 0 -1
 # 计算实际请求数（需要在应用层处理）
 # 当前时间：1705312400000
 # 60 秒前：1705312340000
-# 过滤出 > 1705312340000 的记录 = 3 个请求`}</pre>
+# 过滤出 > 1705312340000 的记录 = 3 个请求`} />
 
         <div className={styles.advantage}>
           <p>💡 <strong>完整的限流 Lua 脚本</strong>（原子操作，保证并发安全）：</p>
-          <pre className={styles.codeBlock}>{`-- 滑动窗口限流 Lua 脚本
+          <CodeBlock language="lua" code={`-- 滑动窗口限流 Lua 脚本
 local key = KEYS[1]           -- rate limit key
 local window = tonumber(ARGV[1])  -- 窗口大小（毫秒）
 local limit = tonumber(ARGV[2])   -- 限制次数
@@ -1995,12 +1995,12 @@ if count < limit then
     return 1  -- 允许
 else
     return 0  -- 拒绝
-end`}</pre>
+end`} />
         </div>
 
         <h4>场景 5：实时排行榜（有序需求）</h4>
         <p>虽然 List 不如 Sorted Set 适合排行榜，但可以实现简单的 TOP N 功能。</p>
-        <pre className={styles.codeBlock}>{`# 更新用户得分
+        <CodeBlock language="redis" code={`# 更新用户得分
 redis> LPUSH leaderboard:game1 '{"user_id": 123, "score": 9500}'
 redis> LPUSH leaderboard:game1 '{"user_id": 456, "score": 8700}'
 redis> LPUSH leaderboard:game1 '{"user_id": 789, "score": 9200}'
@@ -2009,7 +2009,7 @@ redis> LPUSH leaderboard:game1 '{"user_id": 789, "score": 9200}'
 redis> LRANGE leaderboard:game1 0 9
 
 # 注意：List 本身不排序，需要应用层处理
-# 更推荐使用 Sorted Set：ZADD + ZREVRANGE`}</pre>
+# 更推荐使用 Sorted Set：ZADD + ZREVRANGE`} />
 
         <h4>配置推荐总结表</h4>
         <table className={styles.performanceTable}>
@@ -2192,7 +2192,7 @@ redis> LRANGE leaderboard:game1 0 9
         </div>
 
         <h4>Redis 配置完整推荐</h4>
-        <pre className={styles.codeBlock}>{`# redis.conf 全局配置
+        <CodeBlock language="bash" code={`# redis.conf 全局配置
 
 # 默认配置（适合大多数场景）
 list-max-ziplist-size -2
@@ -2211,7 +2211,7 @@ list-compress-depth 1
 list-max-ziplist-size -1
 list-compress-depth 0
 
-# 场景 4：超长列表（&gt;100万元素）
+# 场景 4：超长列表（>100万元素）
 list-max-ziplist-size -5
 list-compress-depth 2
 
@@ -2219,10 +2219,10 @@ list-compress-depth 2
 # 已有列表需要重新创建才能应用新参数
 redis> CONFIG SET list-max-ziplist-size -4
 redis> DEL old_list
-redis> LPUSH old_list ...  # 重新创建`}</pre>
+redis> LPUSH old_list ...  # 重新创建`} />
 
         <h4>性能问题排查清单</h4>
-        <pre className={styles.codeBlock}>{`# 问题 1：LPUSH/RPOP 突然变慢
+        <CodeBlock language="bash" code={`# 问题 1：LPUSH/RPOP 突然变慢
 可能原因：节点分裂/合并
 排查：
   redis> DEBUG OBJECT mylist
@@ -2250,7 +2250,7 @@ redis> LPUSH old_list ...  # 重新创建`}</pre>
 
 解决方案：
   - 结合 LTRIM 限制长度
-  - 使用 EXPIRE 设置过期时间`}</pre>
+  - 使用 EXPIRE 设置过期时间`} />
 
         <h4>QuickList vs 其他数据结构对比</h4>
         <table className={styles.performanceTable}>
@@ -2321,14 +2321,14 @@ redis> LPUSH old_list ...  # 重新创建`}</pre>
         </ul>
 
         <h4>学习路径建议</h4>
-        <pre className={styles.codeBlock}>{`深入学习 QuickList 的路径：
+        <CodeBlock language="text" code={`深入学习 QuickList 的路径：
 
 1. 入门：理解 QuickList = 双向链表 + ZipList
 2. 进阶：掌握 fill 和 compress 参数的作用
 3. 实践：在真实项目中选择合适的场景使用
 4. 优化：根据数据特点调优配置参数
 5. 深入：理解分裂/合并的触发条件和代价
-6. 精通：能够在生产环境排查和解决 QuickList 相关问题`}</pre>
+6. 精通：能够在生产环境排查和解决 QuickList 相关问题`} />
       </>
     ),
     keyPoints: [

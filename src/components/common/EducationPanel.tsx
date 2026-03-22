@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './EducationPanel.module.css';
+import { CodeBlock } from '@/components/common/CodeBlock';
 
 export const EducationPanel: React.FC = () => {
   return (
@@ -85,13 +86,11 @@ export const EducationPanel: React.FC = () => {
 
       <section className={styles.section}>
         <h3>🔧 Redis中的使用</h3>
-        <div className={styles.codeBlock}>
-          <h4>常见List命令如何使用QuickList：</h4>
-          <pre>{`# LPUSH/RPUSH - 头尾插入
+        <CodeBlock language="redis" code={`# LPUSH/RPUSH - 头尾插入
 LPUSH mylist "element1"    # 在QuickList头部节点插入
 RPUSH mylist "element2"    # 在QuickList尾部节点插入
 
-# LPOP/RPOP - 头尾弹出  
+# LPOP/RPOP - 头尾弹出
 LPOP mylist                # 从头部节点弹出
 RPOP mylist                # 从尾部节点弹出
 
@@ -102,8 +101,7 @@ LINDEX mylist 10           # QuickList遍历节点找到第10个元素
 LINSERT mylist BEFORE "pivot" "new"  # 可能触发节点分裂
 
 # 查看内存使用
-MEMORY USAGE mylist        # 查看QuickList实际内存占用`}</pre>
-        </div>
+MEMORY USAGE mylist        # 查看QuickList实际内存占用`} />
       </section>
 
       <section className={styles.section}>
@@ -221,7 +219,7 @@ MEMORY USAGE mylist        # 查看QuickList实际内存占用`}</pre>
         <h3>🔍 实际应用示例</h3>
         <div className={styles.example}>
           <h4>场景1：消息队列</h4>
-          <pre className={styles.code}>{`# 生产者：向队列尾部推送消息
+          <CodeBlock language="bash" code={`# 生产者：向队列尾部推送消息
 RPUSH message_queue "task1"
 RPUSH message_queue "task2"
 
@@ -230,12 +228,12 @@ BLPOP message_queue 0    # 阻塞式弹出
 
 # 配置建议：
 list-max-ziplist-size -2  # 8KB节点
-list-compress-depth 0     # 不压缩，保证性能`}</pre>
+list-compress-depth 0     # 不压缩，保证性能`} />
         </div>
 
         <div className={styles.example}>
           <h4>场景2：用户操作历史（启用压缩）</h4>
-          <pre className={styles.code}>{`# 记录用户操作
+          <CodeBlock language="bash" code={`# 记录用户操作
 LPUSH user:1001:history "login"
 LPUSH user:1001:history "view_page"
 LPUSH user:1001:history "purchase"
@@ -245,7 +243,7 @@ LRANGE user:1001:history 0 9
 
 # 配置建议：
 list-max-ziplist-size -1  # 4KB节点
-list-compress-depth 2     # 头尾各2个不压缩`}</pre>
+list-compress-depth 2     # 头尾各2个不压缩`} />
         </div>
       </section>
     </div>

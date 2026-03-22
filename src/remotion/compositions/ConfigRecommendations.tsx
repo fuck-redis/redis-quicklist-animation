@@ -129,7 +129,7 @@ export const ConfigRecommendations: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          bottom: 80,
+          bottom: 100,
           left: 0,
           right: 0,
           display: 'flex',

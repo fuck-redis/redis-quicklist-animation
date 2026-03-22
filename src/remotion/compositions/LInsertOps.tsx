@@ -83,11 +83,12 @@ export const LInsertOps: React.FC = () => {
           top: 150,
           left: 0,
           right: 0,
-          bottom: 80,
+          bottom: 140,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
+          paddingTop: 20,
           gap: 20,
         }}
       >

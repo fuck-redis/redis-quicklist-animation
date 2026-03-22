@@ -134,7 +134,7 @@ export const PointerConnections: React.FC = () => {
           style={{
             position: 'absolute',
             right: 80,
-            bottom: 160,
+            bottom: 200,
             color: '#f472b6',
             fontSize: 14,
             fontWeight: 'bold',

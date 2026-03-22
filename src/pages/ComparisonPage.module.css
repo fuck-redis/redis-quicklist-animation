@@ -37,7 +37,7 @@
 .structureButton {
   background: white;
   border: 2px solid #e8ecf1;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: var(--spacing-lg);
   cursor: pointer;
   transition: all 0.3s;
@@ -70,7 +70,7 @@
 
 .detailSection {
   background: white;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: var(--spacing-xl);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   margin-bottom: var(--spacing-xl);
@@ -235,7 +235,7 @@
 
 .comparisonTable {
   background: white;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: var(--spacing-xl);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   margin-bottom: var(--spacing-xl);
@@ -288,7 +288,7 @@
 
 .conclusion {
   background: white;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: var(--spacing-xl);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }

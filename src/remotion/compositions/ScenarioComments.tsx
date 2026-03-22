@@ -34,6 +34,7 @@ export const ScenarioComments: React.FC = () => {
           top: 80,
           left: 0,
           right: 0,
+          bottom: 280,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

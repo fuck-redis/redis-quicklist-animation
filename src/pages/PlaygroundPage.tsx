@@ -14,8 +14,8 @@ export const PlaygroundPage: React.FC = () => {
     nodeCount: quickList.nodeCount,
     elementCount: quickList.totalElements,
     memoryUsage: (quickList.totalMemory / 1024).toFixed(1),
-    avgFillRate: nodeArray.length > 0 
-      ? Math.round(nodeArray.reduce((sum: number, node) => sum + (node.elementCount / quickList.config.fill * 100), 0) / nodeArray.length)
+    avgFillRate: nodeArray.length > 0 && quickList.config.fill !== 0
+      ? Math.round(nodeArray.reduce((sum: number, node) => sum + (node.elementCount / Math.abs(quickList.config.fill) * 100), 0) / nodeArray.length)
       : 0
   };
   

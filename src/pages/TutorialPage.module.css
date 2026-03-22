@@ -112,7 +112,7 @@
   padding: 6px 16px;
   background: #FEE2E2;
   color: #DC382D;
-  border-radius: 20px;
+  border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 12px;
@@ -128,7 +128,7 @@
 .stepContent {
   background: white;
   padding: 32px;
-  border-radius: 16px;
+  border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   margin-bottom: 24px;
   line-height: 1.8;
@@ -189,7 +189,7 @@
 .compressStrategy {
   background: #1a1a1a;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 6px;
   margin: 20px 0;
   overflow-x: auto;
 }
@@ -208,7 +208,7 @@
   background: #1a1a1a;
   color: #e5e5e5;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   line-height: 1.6;
@@ -268,7 +268,7 @@
 .step {
   background: var(--bg-secondary);
   padding: 16px;
-  border-radius: 12px;
+  border-radius: 6px;
   border-left: 4px solid #DC382D;
 }
 
@@ -308,7 +308,7 @@
 .keyPoints {
   background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
   padding: 24px;
-  border-radius: 16px;
+  border-radius: 6px;
   margin-bottom: 24px;
   border: 1px solid #FCA5A5;
 }
