@@ -85,6 +85,22 @@
   font-size: 18px;
 }
 
+.githubLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.2s;
+  border-radius: 6px;
+}
+
+.githubLink:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
 @media (max-width: 768px) {
   .logoText {
     display: none;
@@ -96,6 +112,11 @@
 
   .navLink span:not(.navIcon) {
     display: none;
+  }
+
+  .githubLink {
+    padding: 8px;
+    margin-left: 4px;
   }
 
   .navLink {
