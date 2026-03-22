@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Navigation } from '@/components/layout/Navigation';
 import { HomePage } from '@/pages/HomePage';
 import { TutorialPage } from '@/pages/TutorialPage';
@@ -10,7 +10,7 @@ import './styles/global.css';
 
 function App() {
   return (
-    <BrowserRouter basename="/redis-quicklist-animation">
+    <HashRouter>
       <Navigation />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -21,7 +21,7 @@ function App() {
         <Route path="/scenarios" element={<ScenariosPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
